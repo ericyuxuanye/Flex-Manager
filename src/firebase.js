@@ -1,12 +1,15 @@
 import { initializeApp } from "firebase/app";
 import {
   GoogleAuthProvider,
+  setPersistence,
   getAuth,
   signInWithPopup,
   signInWithEmailAndPassword,
   createUserWithEmailAndPassword,
   sendPasswordResetEmail,
   signOut,
+  browserLocalPersistence,
+  browserSessionPersistence,
 } from "firebase/auth";
 import {
   getFirestore,
@@ -17,13 +20,13 @@ import {
   addDoc,
 } from "firebase/firestore";
 const firebaseConfig = {
-  apiKey: "AIzaSyDIXJ5YT7hoNbBFqK3TBcV41-TzIO-7n7w",
-  authDomain: "fir-auth-6edd8.firebaseapp.com",
-  projectId: "fir-auth-6edd8",
-  storageBucket: "fir-auth-6edd8.appspot.com",
-  messagingSenderId: "904760319835",
-  appId: "1:904760319835:web:44fd0d957f114b4e51447e",
-  measurementId: "G-Q4TYKH9GG7",
+  apiKey: "AIzaSyAqMW192GdbbKjrouWul_m11IJc_R2TKms",
+  authDomain: "flex-manager-7f31e.firebaseapp.com",
+  projectId: "flex-manager-7f31e",
+  storageBucket: "flex-manager-7f31e.appspot.com",
+  messagingSenderId: "240579438113",
+  appId: "1:240579438113:web:af575f8a957ae1ebb92560",
+  measurementId: "G-F1JMXSQNCZ"
 };
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
@@ -48,8 +51,12 @@ const signInWithGoogle = async () => {
     alert(err.message);
   }
 };
-const logInWithEmailAndPassword = async (email, password) => {
+const logInWithEmailAndPassword = async (email, password, remember) => {
   try {
+    setPersistence(
+      auth,
+      remember ? browserLocalPersistence : browserSessionPersistence
+    );
     await signInWithEmailAndPassword(auth, email, password);
   } catch (err) {
     console.error(err);
@@ -84,6 +91,11 @@ const sendPasswordReset = async (email) => {
 const logout = () => {
   signOut(auth);
 };
+
+const getClass = async () => {
+  const userDoc = await db.collection('users').doc(auth.currentUser.uid).get()
+  return userDoc.class;
+};
 export {
   auth,
   db,
@@ -92,4 +104,5 @@ export {
   registerWithEmailAndPassword,
   sendPasswordReset,
   logout,
+  getClass,
 };

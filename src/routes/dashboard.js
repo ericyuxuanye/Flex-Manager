@@ -7,6 +7,7 @@ import { query, collection, getDocs, where } from "firebase/firestore";
 function Dashboard() {
   const [user, loading, error] = useAuthState(auth);
   const [name, setName] = useState("");
+  const [defaultClass, setDefaultClass] = useState(NaN);
   const navigate = useNavigate();
   const fetchUserName = async () => {
     try {
@@ -14,6 +15,9 @@ function Dashboard() {
       const doc = await getDocs(q);
       const data = doc.docs[0].data();
       setName(data.name);
+      setDefaultClass(
+        data.defaultClass === undefined ? NaN : data.defaultClass
+      );
     } catch (err) {
       console.error(err);
       alert("An error occured while fetching user data");
@@ -26,15 +30,16 @@ function Dashboard() {
   }, [user, loading]);
   return (
     <div className="dashboard">
-       <div className="dashboard__container">
+      <div className="dashboard__container">
         Logged in as
-         <div>{name}</div>
-         <div>{user?.email}</div>
-         <button className="dashboard__btn" onClick={logout}>
+        <div>{name}</div>
+        <div>{user?.email}</div>
+        <p>Default class: {defaultClass}</p>
+        <button className="dashboard__btn" onClick={logout}>
           Logout
-         </button>
-       </div>
-     </div>
+        </button>
+      </div>
+    </div>
   );
 }
 export default Dashboard;
