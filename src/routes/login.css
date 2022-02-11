@@ -67,6 +67,7 @@
   background-size: 150% 100%;
   transition: background-position linear 0.2s;
 }
+/* This after element acts like the shadow */
 .login__btn::after {
   content: "";
   position: absolute;
@@ -92,10 +93,10 @@
   -webkit-transition: all 0.2s;
   transition: all 0.2s;
 }
-.login__btn:hover {
+.login__btn:hover, .login__btn:focus::after {
   background-position: 50%;
 }
-.login__btn:hover::after {
+.login__btn:hover::after, .login__btn:focus::after {
   /* Changing blur effect */
   -webkit-filter: blur(4px);
   -moz-filter: blur(4px);
@@ -127,7 +128,7 @@
 .login__google:hover {
   box-shadow: 0 3px 10px rgb(0 0 0 / 0.3);
 }
-.login__google:hover:active {
+.login__google:hover:active, .login__google:focus {
   box-shadow: 0 3px 25px rgb(0 0 0 / 0.4);
 }
 #google_image {

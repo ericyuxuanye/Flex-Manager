@@ -1,3 +1,4 @@
+// Functions for working with firebase
 import { initializeApp } from "firebase/app";
 import {
   GoogleAuthProvider,
@@ -10,18 +11,15 @@ import {
   signOut,
   browserLocalPersistence,
   browserSessionPersistence,
-  onAuthStateChanged,
 } from "firebase/auth";
 import {
   getFirestore,
   query,
   getDocs,
-  getDoc,
   doc,
   setDoc,
   collection,
   where,
-  addDoc,
   updateDoc,
 } from "firebase/firestore";
 const firebaseConfig = {
