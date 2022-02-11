@@ -19,7 +19,7 @@ function Login() {
       return;
     }
     if (user) navigate("/dashboard");
-  }, [user, loading]);
+  });
   return (
     <div className="login">
       {/*replace with logo*/}
@@ -60,7 +60,11 @@ function Login() {
           Login
         </button>
         <button className="btn login__google" onClick={signInWithGoogle}>
-          <img src={google} alt="google" style={{ verticalAlign: "middle" }} />
+          <img
+            id="google_image"
+            src={google}
+            alt="google"
+          />
           &nbsp;Login with Google
         </button>
         <div>

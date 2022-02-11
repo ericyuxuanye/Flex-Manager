@@ -3,6 +3,7 @@ import Login from "./routes/login";
 import Register from "./routes/register";
 import Reset from "./routes/reset";
 import Dashboard from "./routes/dashboard";
+import SetRoom from "./routes/setRoom";
 function App() {
   return (
     <div className="app">
@@ -12,6 +13,7 @@ function App() {
           <Route exact path="/register" element={<Register />} />
           <Route exact path="/reset" element={<Reset />} />
           <Route exact path="/dashboard" element={<Dashboard />} />
+          <Route exact path="/setRoom" element={<SetRoom/>} />
         </Routes>
       </Router>
     </div>

@@ -3,7 +3,7 @@ import { useAuthState } from "react-firebase-hooks/auth";
 import { useNavigate } from "react-router-dom";
 import "./dashboard.css";
 import { auth, db, logout } from "../firebase";
-import { query, collection, getDocs, where } from "firebase/firestore";
+import { query, collection, getDocs, where, getDoc, doc } from "firebase/firestore";
 function Dashboard() {
   const [user, loading, error] = useAuthState(auth);
   const [name, setName] = useState("");
@@ -13,11 +13,10 @@ function Dashboard() {
     try {
       const q = query(collection(db, "users"), where("uid", "==", user?.uid));
       const doc = await getDocs(q);
+      console.log(doc);
       const data = doc.docs[0].data();
       setName(data.name);
-      setDefaultClass(
-        data.defaultClass === undefined ? NaN : data.defaultClass
-      );
+      setDefaultClass(data.defaultClass);
     } catch (err) {
       console.error(err);
       alert("An error occured while fetching user data");
@@ -26,8 +25,9 @@ function Dashboard() {
   useEffect(() => {
     if (loading) return;
     if (!user) return navigate("/");
+    if (defaultClass === undefined) return navigate("/setRoom");
     fetchUserName();
-  }, [user, loading]);
+  });
   return (
     <div className="dashboard">
       <div className="dashboard__container">

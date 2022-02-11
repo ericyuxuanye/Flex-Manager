@@ -10,14 +10,19 @@ import {
   signOut,
   browserLocalPersistence,
   browserSessionPersistence,
+  onAuthStateChanged,
 } from "firebase/auth";
 import {
   getFirestore,
   query,
   getDocs,
+  getDoc,
+  doc,
+  setDoc,
   collection,
   where,
   addDoc,
+  updateDoc,
 } from "firebase/firestore";
 const firebaseConfig = {
   apiKey: "AIzaSyAqMW192GdbbKjrouWul_m11IJc_R2TKms",
@@ -39,7 +44,7 @@ const signInWithGoogle = async () => {
     const q = query(collection(db, "users"), where("uid", "==", user.uid));
     const docs = await getDocs(q);
     if (docs.docs.length === 0) {
-      await addDoc(collection(db, "users"), {
+      await setDoc(doc(collection(db, "users"), user.uid), {
         uid: user.uid,
         name: user.displayName,
         authProvider: "google",
@@ -67,7 +72,7 @@ const registerWithEmailAndPassword = async (name, email, password) => {
   try {
     const res = await createUserWithEmailAndPassword(auth, email, password);
     const user = res.user;
-    await addDoc(collection(db, "users"), {
+    await setDoc(doc(collection(db, "users"), user.uid), {
       uid: user.uid,
       name,
       authProvider: "local",
@@ -92,10 +97,19 @@ const logout = () => {
   signOut(auth);
 };
 
-const getClass = async () => {
-  const userDoc = await db.collection('users').doc(auth.currentUser.uid).get()
-  return userDoc.class;
+const getDefaultClass = async () => {
+  const userDoc = await db.collection('users').doc(auth.currentUser.uid).get();
+  return userDoc.defaultClass;
 };
+
+const setDefaultClass = async (classId) => {
+  // maybe check if classId is valid first??
+  const uid = auth.currentUser.uid;
+  await updateDoc(doc(db, "users", uid), {
+    defaultClass: classId,
+  });
+};
+
 export {
   auth,
   db,
@@ -104,5 +118,6 @@ export {
   registerWithEmailAndPassword,
   sendPasswordReset,
   logout,
-  getClass,
+  getDefaultClass,
+  setDefaultClass,
 };
