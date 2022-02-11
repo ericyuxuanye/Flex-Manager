@@ -19,7 +19,7 @@ function Register() {
   };
   useEffect(() => {
     if (loading) return;
-    if (user) history.replace("/dashboard");
+    if (user) history("/dashboard");
   }, [user, loading]);
   return (
     <div className="register">

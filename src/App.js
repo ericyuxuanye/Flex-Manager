@@ -3,7 +3,6 @@ import Login from "./routes/login";
 import Register from "./routes/register";
 import Reset from "./routes/reset";
 import Dashboard from "./routes/dashboard";
-import "./App.css"
 function App() {
   return (
     <div className="app">

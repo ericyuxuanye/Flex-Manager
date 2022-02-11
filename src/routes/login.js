@@ -3,6 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { auth, logInWithEmailAndPassword, signInWithGoogle } from "../firebase";
 import { useAuthState } from "react-firebase-hooks/auth";
 import "./login.css";
+import google from "../google.svg";
 function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -10,7 +11,7 @@ function Login() {
   const [user, loading, error] = useAuthState(auth);
   const navigate = useNavigate();
   const linkStyle = {
-    "textDecoration": "none",
+    textDecoration: "none",
   };
   useEffect(() => {
     if (loading) {
@@ -53,13 +54,14 @@ function Login() {
           <br />
         </div>
         <button
-          className="login__btn"
+          className="btn login__btn"
           onClick={() => logInWithEmailAndPassword(email, password, remember)}
         >
           Login
         </button>
-        <button className="login__btn login__google" onClick={signInWithGoogle}>
-          Login with Google
+        <button className="btn login__google" onClick={signInWithGoogle}>
+          <img src={google} alt="google" style={{ verticalAlign: "middle" }} />
+          &nbsp;Login with Google
         </button>
         <div>
           <Link to="/reset" style={linkStyle}>

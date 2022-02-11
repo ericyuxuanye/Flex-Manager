@@ -1,3 +1,9 @@
+:root {
+  --purple: #7f00ff;
+  --pink: #e100ff;
+  --text: #616161;
+}
+/* Login stuff */
 .login {
   height: 100vh;
   width: 100vw;
@@ -19,7 +25,6 @@
   box-shadow: 2px 2px 5px #e8e8e8;
   border-radius: 10px;
   padding: 30px;
-  padding-top: 10px;
   outline: none;
 }
 .login__textBox {
@@ -34,80 +39,101 @@
   margin-bottom: 10px;
   text-align: left;
 }
-.login__btn {
-  position: relative;
-  z-index: 1;
-  padding: 10px;
-  font-size: 18px;
-  margin-bottom: 10px;
+.btn {
+  font-size: 16px;
+  margin-bottom: 15px;
+  outline: none;
   border: none;
-  color: white;
-  background-color: white;
-  background-color: #4158d0;
-  background-image: linear-gradient(
-    43deg,
-    #4158d0 0%,
-    #c850c0 46%,
-    #ffcc70 100%
-  );
-  border-radius: 25px;
-  transition: color 0.5s linear;
+  -webkit-appearance: none;
+  -webkit-tap-highlight-color: transparent;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  padding: 0.75em 1.75em;
+  border-radius: 50px;
+  display: inline-block;
+  cursor: pointer;
 }
-.login__btn::before {
+.login__btn {
+  z-index: 1;
+  position: relative;
+  color: #fff;
+
+  /* Our gradient */
+  background: -webkit-gradient(
+    linear,
+    left top,
+    right top,
+    from(var(--purple)),
+    to(var(--pink))
+  );
+  background: linear-gradient(to right, var(--purple), var(--pink));
+  background-size: 150% 100%;
+  transition: background-position linear 0.2s;
+}
+.login__btn::after {
   content: "";
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
   position: absolute;
   z-index: -1;
-  background-color: #9aacff;
-  background-image: linear-gradient(
-    43deg,
-    #9aacff 0%,
-    #ff64f5 46%,
-    #faff60 100%
-  );
-  transition: opacity 0.5s linear;
-  opacity: 0;
-  border-radius: 25px;
-}
-.login__btn:hover::before {
-  opacity: 1;
-}
-.login__btn:hover:active::before {
-  opacity: 0;
-  transition: linear 0.2;
+  bottom: -10px;
+  left: 5%;
+  height: 110%;
+  width: 90%;
+  opacity: 0.8;
+  border-radius: 50px;
+
+  /* Declaring our shadow color inherit from the parent (button) */
+  background: inherit;
+
+  /* Blurring the element for shadow effect */
+  -webkit-filter: blur(6px);
+  -moz-filter: blur(6px);
+  -o-filter: blur(6px);
+  -ms-filter: blur(6px);
+  filter: blur(6px);
+
+  /* Transition for the magic */
+  -webkit-transition: all 0.2s;
+  transition: all 0.2s;
 }
 .login__btn:hover {
-  color: black;
+  background-position: 50%;
 }
-.login__btn:hover:active {
-  transition: linear 0.2s;
-  color: white;
-}
+.login__btn:hover::after {
+  /* Changing blur effect */
+  -webkit-filter: blur(4px);
+  -moz-filter: blur(4px);
+  -o-filter: blur(4px);
+  -ms-filter: blur(4px);
+  filter: blur(4px);
 
-.login__google {
-  position: relative;
-  background: rgb(233, 66, 53);
-  background-image: linear-gradient(
-    36deg,
-    rgba(233, 66, 53, 1) 7%,
-    rgba(250, 187, 5, 1) 32%,
-    rgba(52, 168, 83, 1) 76%,
-    rgba(66, 133, 244, 1) 100%
-  );
-  z-index: 1;
+  /* And change the style properties */
+  width: 100%;
+  bottom: -5px;
+  left: 0;
 }
-.login__google::before {
-  background: rgb(255, 74, 59);
-  background-image: linear-gradient(
-    36deg,
-    rgba(255, 74, 59, 1) 4%,
-    rgba(250, 237, 5, 1) 36%,
-    rgba(53, 255, 14, 1) 70%,
-    rgba(37, 149, 255, 1) 100%
-  );
+.login__btn:hover:active::after {
+  -webkit-filter: blur(10px);
+  -moz-filter: blur(10px);
+  -o-filter: blur(10px);
+  -ms-filter: blur(10px);
+  filter: blur(10px);
+}
+.login__google {
+  color: var(--text);
+  background: white;
+  outline: 1px solid #cccccc;
+  z-index: 1;
+  box-shadow: 0 23px 10px -15px rgb(0 0 0 / 0.2);
+  -webkit-transition: all 0.2s;
+  transition: all 0.2s;
+}
+.login__google:hover {
+  box-shadow: 0 3px 10px rgb(0 0 0 / 0.3);
+}
+.login__google:hover:active {
+  box-shadow: 0 3px 25px rgb(0 0 0 / 0.4);
 }
 div.login {
   margin-top: 7px;
