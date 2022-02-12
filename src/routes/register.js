@@ -6,8 +6,8 @@ import {
   registerWithEmailAndPassword,
   signInWithGoogle,
 } from "../firebase";
-import "./login.css";
 import google from "../google.svg";
+import "./register.css";
 function Register() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -23,33 +23,33 @@ function Register() {
     if (user) history("/dashboard");
   }, [user, loading]);
   return (
-    <div className="login">
+    <div className="middle">
       {/*replace with logo*/}
       <h1 classname="title1">Flex Scheduler</h1>
-      <div className="login__container">
+      <div className="container">
         <h2 className="title2">Register</h2>
         <input
           type="text"
-          className="login__textBox"
+          className="textBox"
           value={name}
           onChange={(e) => setName(e.target.value)}
           placeholder="Full Name"
         />
         <input
           type="text"
-          className="login__textBox"
+          className="textBox"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           placeholder="E-mail Address"
         />
         <input
           type="password"
-          className="login__textBox"
+          className="textBox"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
           placeholder="Password"
         />
-        <button className="btn login__btn register__btn" onClick={register}>
+        <button className="btn gradient__btn register__btn" onClick={register}>
           Register
         </button>
         <button

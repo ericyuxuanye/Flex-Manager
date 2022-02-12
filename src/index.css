@@ -16,3 +16,109 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+/* for round buttons :) */
+.btn {
+  font-size: 16px;
+  margin-bottom: 15px;
+  outline: none;
+  border: none;
+  -webkit-appearance: none;
+  -webkit-tap-highlight-color: transparent;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  padding: 0.75em 1.75em;
+  border-radius: 50px;
+  display: inline-block;
+  cursor: pointer;
+}
+.title1 .title2 {
+  display: block;
+}
+/* Fill screen and put stuff in middle */
+.middle {
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  color: #616161;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  background-color: #f8f8f8;
+  box-shadow: 2px 2px 5px #e8e8e8;
+  border-radius: 10px;
+  padding: 30px;
+  outline: none;
+}
+.textBox {
+  padding: 10px;
+  font-size: 18px;
+  margin-bottom: 10px;
+  border-radius: 10px;
+  border: 1px solid #eee;
+}
+/* for the buttons with gradient shadows */
+.gradient__btn {
+  z-index: 1;
+  position: relative;
+  color: #fff;
+  transition: background-position linear 0.2s;
+}
+/* This after element acts like the shadow */
+.gradient__btn::after {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  bottom: -10px;
+  left: 5%;
+  height: 110%;
+  width: 90%;
+  opacity: 0.8;
+  border-radius: 50px;
+
+  /* Declaring our shadow color inherit from the parent (button) */
+  background: inherit;
+
+  /* Blurring the element for shadow effect */
+  -webkit-filter: blur(6px);
+  -moz-filter: blur(6px);
+  -o-filter: blur(6px);
+  -ms-filter: blur(6px);
+  filter: blur(6px);
+
+  /* Transition for the magic */
+  -webkit-transition: all 0.2s;
+  transition: all 0.2s;
+}
+.gradient__btn:hover,
+.gradient__btn:focus::after {
+  background-position: 50%;
+}
+.gradient__btn:hover::after,
+.gradient__btn:focus::after {
+  /* Changing blur effect */
+  -webkit-filter: blur(4px);
+  -moz-filter: blur(4px);
+  -o-filter: blur(4px);
+  -ms-filter: blur(4px);
+  filter: blur(4px);
+
+  /* And change the style properties */
+  width: 100%;
+  bottom: -5px;
+  left: 0;
+}
+.gradient__btn:hover:active::after {
+  -webkit-filter: blur(10px);
+  -moz-filter: blur(10px);
+  -o-filter: blur(10px);
+  -ms-filter: blur(10px);
+  filter: blur(10px);
+}

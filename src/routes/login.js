@@ -21,21 +21,21 @@ function Login() {
     if (user) navigate("/dashboard");
   });
   return (
-    <div className="login">
+    <div className="middle">
       {/*replace with logo*/}
       <h1 className="title1">Flex Scheduler</h1>
-      <div className="login__container">
+      <div className="container">
         <h2 className="title2">Log In</h2>
         <input
           type="text"
-          className="login__textBox"
+          className="textBox"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           placeholder="E-mail Address"
         />
         <input
           type="password"
-          className="login__textBox"
+          className="textBox"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
           placeholder="Password"
@@ -54,7 +54,7 @@ function Login() {
           <br />
         </div>
         <button
-          className="btn login__btn"
+          className="btn login__btn gradient__btn"
           onClick={() => logInWithEmailAndPassword(email, password, remember)}
         >
           Login

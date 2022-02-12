@@ -31,13 +31,14 @@ function Dashboard() {
     fetchUserName();
   });
   return (
-    <div className="dashboard">
-      <div className="dashboard__container">
+    <div className="middle">
+      <h1 className="title1">Dashboard</h1>
+      <div className="container">
         Logged in as
         <div>{name}</div>
         <div>{user?.email}</div>
         <p>Default class: {defaultClass}</p>
-        <button className="dashboard__btn" onClick={logout}>
+        <button className="btn gradient__btn dashboard__btn" onClick={logout}>
           Logout
         </button>
       </div>

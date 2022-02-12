@@ -1,0 +1,9 @@
+.register__btn {
+  background: rgb(235, 65, 50);
+  background: linear-gradient(
+    90deg,
+    rgba(235, 65, 50, 1) 0%,
+    rgba(240, 195, 0, 1) 71%
+  );
+  background-size: 150% 100%;
+}

@@ -14,7 +14,7 @@ function SetRoom() {
     try {
       const docSnap = await getDoc(doc(db, "users", user.uid));
       if (!docSnap.exists()) {
-        throw new Error("Cannot find document associated with user"); 
+        throw new Error("Cannot find document associated with user");
       }
       const data = docSnap.data();
       if (data.defaultClass !== undefined) {
@@ -41,15 +41,19 @@ function SetRoom() {
   });
 
   return (
-    <div className="setClassBox">
-      <h1>Please set your default Class</h1>
-      <div className="setClassUserInput">
-        <input
-          type="number"
-          placeholder="Default Class Number"
-          onChange={(e) => setNumber(e.target.valueAsNumber)}
-        />
-        <button onClick={submit}>Submit</button>
+    <div className="middle">
+      <h1 className="title1">Flex Manager</h1>
+      <div className="container">
+        <h2 className="title2">Please set your default Class</h2>
+        <div className="setClassUserInput">
+          <input
+            type="number"
+            placeholder="Default Class Number"
+            onChange={(e) => setNumber(e.target.valueAsNumber)}
+            className="textBox"
+          />
+          <button onClick={submit} className="btn gradient__btn submit__btn">Submit</button>
+        </div>
       </div>
     </div>
   );

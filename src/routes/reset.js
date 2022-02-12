@@ -13,23 +13,28 @@ function Reset() {
     if (user) navigate("/dashboard");
   }, [user, loading]);
   return (
-    <div className="reset">
-      <div className="reset__container">
+    <div className="middle">
+      <h1 className="title1">Flex Manager</h1>
+      <div className="container">
+        <h2 className="title2">Password Reset</h2>
         <input
           type="text"
-          className="reset__textBox"
+          className="textBox"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           placeholder="E-mail Address"
         />
         <button
-          className="reset__btn"
+          className="btn gradient__btn reset__btn"
           onClick={() => sendPasswordReset(email)}
         >
           Send password reset email
         </button>
         <div>
           Don't have an account? <Link to="/register">Register</Link> now.
+        </div>
+        <div>
+          Wrong place? Go to <Link to="/">Login</Link>.
         </div>
       </div>
     </div>
