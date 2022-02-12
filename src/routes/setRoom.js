@@ -1,11 +1,30 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import "./setRoom.css";
-import { setDefaultClass } from "../firebase";
+import { setDefaultClass, auth, db } from "../firebase";
+import { useAuthState } from "react-firebase-hooks/auth";
+import { getDoc, doc } from "firebase/firestore";
 
 function SetRoom() {
   const [number, setNumber] = useState(NaN);
   const navigate = useNavigate();
+  const [user, loading, error] = useAuthState(auth);
+  /* if user already has default class, navigate away */
+  const fetchDefaultClass = async () => {
+    try {
+      const docSnap = await getDoc(doc(db, "users", user.uid));
+      if (!docSnap.exists()) {
+        throw new Error("Cannot find document associated with user"); 
+      }
+      const data = docSnap.data();
+      if (data.defaultClass !== undefined) {
+        navigate("/dashboard");
+      }
+    } catch (err) {
+      console.error(err);
+      alert("An error occurred while fetching user data");
+    }
+  };
 
   const submit = async () => {
     if (!Number.isNaN(number)) {
@@ -14,6 +33,12 @@ function SetRoom() {
       navigate("/Dashboard");
     }
   };
+
+  useEffect(() => {
+    if (loading) return;
+    if (!user) return navigate("/");
+    fetchDefaultClass();
+  });
 
   return (
     <div className="setClassBox">

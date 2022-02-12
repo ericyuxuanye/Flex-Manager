@@ -3,7 +3,7 @@ import { useAuthState } from "react-firebase-hooks/auth";
 import { useNavigate } from "react-router-dom";
 import "./dashboard.css";
 import { auth, db, logout } from "../firebase";
-import { query, collection, getDocs, where, getDoc, doc } from "firebase/firestore";
+import { getDoc, doc } from "firebase/firestore";
 function Dashboard() {
   const [user, loading, error] = useAuthState(auth);
   const [name, setName] = useState("");
@@ -11,10 +11,11 @@ function Dashboard() {
   const navigate = useNavigate();
   const fetchUserName = async () => {
     try {
-      const q = query(collection(db, "users"), where("uid", "==", user?.uid));
-      const doc = await getDocs(q);
-      console.log(doc);
-      const data = doc.docs[0].data();
+      const docSnap = await getDoc(doc(db, "users", user.uid));
+      if (!docSnap.exists()) {
+        throw new Error("Cannot find document associated with user"); 
+      }
+      const data = docSnap.data();
       setName(data.name);
       setDefaultClass(data.defaultClass);
     } catch (err) {
@@ -26,6 +27,7 @@ function Dashboard() {
     if (loading) return;
     if (!user) return navigate("/");
     if (defaultClass === undefined) return navigate("/setRoom");
+    // fetch user name after we are sure the user exists
     fetchUserName();
   });
   return (

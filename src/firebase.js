@@ -16,6 +16,7 @@ import {
   getFirestore,
   query,
   getDocs,
+  getDoc,
   doc,
   setDoc,
   collection,
@@ -39,10 +40,9 @@ const signInWithGoogle = async () => {
   try {
     const res = await signInWithPopup(auth, googleProvider);
     const user = res.user;
-    const q = query(collection(db, "users"), where("uid", "==", user.uid));
-    const docs = await getDocs(q);
-    if (docs.docs.length === 0) {
-      await setDoc(doc(collection(db, "users"), user.uid), {
+    const docSnap = await getDoc(doc(db, "users", user.uid));
+    if (!docSnap.exists()) {
+      await setDoc(doc(db, "users", user.uid), {
         uid: user.uid,
         name: user.displayName,
         authProvider: "google",
@@ -70,7 +70,7 @@ const registerWithEmailAndPassword = async (name, email, password) => {
   try {
     const res = await createUserWithEmailAndPassword(auth, email, password);
     const user = res.user;
-    await setDoc(doc(collection(db, "users"), user.uid), {
+    await setDoc(doc(db, "users", user.uid), {
       uid: user.uid,
       name,
       authProvider: "local",
