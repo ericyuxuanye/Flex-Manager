@@ -19,7 +19,7 @@
 .login__google {
   color: var(--text);
   background: white;
-  outline: 1px solid #cccccc;
+  border: 1px solid #cccccc;
   z-index: 1;
   box-shadow: 0 23px 10px -15px rgb(0 0 0 / 0.2);
   -webkit-transition: all 0.2s;
