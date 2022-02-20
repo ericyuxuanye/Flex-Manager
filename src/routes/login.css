@@ -1,9 +1,4 @@
 /* Login stuff */
-.login__remember {
-  padding: 10px;
-  margin-bottom: 10px;
-  text-align: left;
-}
 .login__btn {
   /* Our gradient */
   background: -webkit-gradient(

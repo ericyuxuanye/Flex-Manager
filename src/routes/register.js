@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { Link, useNavigate } from "react-router-dom";
+import { TextField } from "@mui/material";
 import {
   auth,
   registerWithEmailAndPassword,
@@ -28,26 +29,29 @@ function Register() {
       <h1 classname="title1">Flex Scheduler</h1>
       <div className="container">
         <h2 className="title2">Register</h2>
-        <input
-          type="text"
+        <TextField
           className="textBox"
+          type="text"
           value={name}
           onChange={(e) => setName(e.target.value)}
-          placeholder="Full Name"
+          label="Full Name"
+          margin="dense"
         />
-        <input
-          type="text"
+        <TextField
           className="textBox"
+          type="text"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
-          placeholder="E-mail Address"
+          label="E-mail Address"
+          margin="dense"
         />
-        <input
-          type="password"
+        <TextField
           className="textBox"
+          type="password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
-          placeholder="Password"
+          label="Password"
+          margin="dense"
         />
         <button className="btn gradient__btn register__btn" onClick={register}>
           Register

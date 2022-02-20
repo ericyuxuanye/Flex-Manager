@@ -19,7 +19,7 @@ code {
 /* for round buttons :) */
 .btn {
   font-size: 16px;
-  margin-bottom: 15px;
+  margin: 5px 0 10px 0;
   outline: none;
   border: none;
   -webkit-appearance: none;
@@ -46,7 +46,6 @@ code {
   flex-direction: column;
   color: #616161;
 }
-
 .container {
   display: flex;
   flex-direction: column;
@@ -58,11 +57,8 @@ code {
   outline: none;
 }
 .textBox {
-  padding: 10px;
-  font-size: 18px;
-  margin-bottom: 10px;
   border-radius: 10px;
-  border: 1px solid #eee;
+  background-color: white;
 }
 /* for the buttons with gradient shadows */
 .gradient__btn {

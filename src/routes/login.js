@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { auth, logInWithEmailAndPassword, signInWithGoogle } from "../firebase";
 import { useAuthState } from "react-firebase-hooks/auth";
+import { Checkbox, FormControlLabel, TextField } from "@mui/material";
 import "./login.css";
 import google from "../google.svg";
 function Login() {
@@ -26,33 +27,34 @@ function Login() {
       <h1 className="title1">Flex Scheduler</h1>
       <div className="container">
         <h2 className="title2">Log In</h2>
-        <input
-          type="text"
+        <TextField
           className="textBox"
+          id="email-textfield"
+          label="email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
-          placeholder="E-mail Address"
+          margin="normal"
         />
-        <input
-          type="password"
+        <TextField
           className="textBox"
+          id="password-textfield"
+          label="password"
           value={password}
+          type="password"
           onChange={(e) => setPassword(e.target.value)}
-          placeholder="Password"
+          margin="normal"
         />
-        <div className="login__remember">
-          <input
-            type="checkbox"
-            id="login__checkBox1"
-            name="login__checkBox1"
-            className="login__checkBox"
-            onChange={(e) =>
-              setRemember(e.target.value === "unchecked" ? false : true)
-            }
-          />
-          <label htmlFor="login__checkBox1">Remember me</label>
-          <br />
-        </div>
+        <FormControlLabel
+          control={
+            <Checkbox
+              defaultChecked
+              onChange={(e) =>
+                setRemember(e.target.value === "unchecked" ? false : true)
+              }
+            />
+          }
+          label="Remember me"
+        />
         <button
           className="btn login__btn gradient__btn"
           onClick={() => logInWithEmailAndPassword(email, password, remember)}
@@ -60,11 +62,7 @@ function Login() {
           Login
         </button>
         <button className="btn login__google" onClick={signInWithGoogle}>
-          <img
-            id="google_image"
-            src={google}
-            alt="google"
-          />
+          <img id="google_image" src={google} alt="google" />
           &nbsp;Login with Google
         </button>
         <div>
