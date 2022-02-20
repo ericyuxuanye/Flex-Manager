@@ -33,7 +33,7 @@ function Login() {
           label="email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
-          margin="normal"
+          margin="dense"
         />
         <TextField
           className="textBox"
@@ -42,7 +42,7 @@ function Login() {
           value={password}
           type="password"
           onChange={(e) => setPassword(e.target.value)}
-          margin="normal"
+          margin="dense"
         />
         <FormControlLabel
           control={
@@ -63,7 +63,7 @@ function Login() {
         </button>
         <button className="btn login__google" onClick={signInWithGoogle}>
           <img id="google_image" src={google} alt="google" />
-          &nbsp;Login with Google
+          Login with Google
         </button>
         <div>
           <Link to="/reset" style={linkStyle}>
