@@ -39,7 +39,6 @@ code {
   padding: 30px;
   outline: none;
 }
-.textBox {
-  border-radius: 10px;
+.textBox input {
   background-color: white;
 }

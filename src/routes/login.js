@@ -46,13 +46,7 @@ function Login() {
           margin="dense"
         />
         <FormControlLabel
-          control={
-            <Checkbox
-              onChange={(e) =>
-                setRemember(e.target.value === "unchecked" ? false : true)
-              }
-            />
-          }
+          control={<Checkbox onChange={(_, checked) => setRemember(checked)} />}
           label="Remember me"
         />
         <Button

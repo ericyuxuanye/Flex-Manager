@@ -15,10 +15,15 @@ function Register() {
   const [password, setPassword] = useState("");
   const [name, setName] = useState("");
   const [user, loading, error] = useAuthState(auth);
+  const [missingName, setMissingName] = useState(false);
   const history = useNavigate();
   const register = () => {
-    if (!name) alert("Please enter name");
-    else registerWithEmailAndPassword(name, email, password);
+    if (!name) {
+      setMissingName(true);
+      return;
+    }
+    setMissingName(false);
+    registerWithEmailAndPassword(name, email, password);
   };
   useEffect(() => {
     if (loading) return;
@@ -37,6 +42,8 @@ function Register() {
           onChange={(e) => setName(e.target.value)}
           label="Full Name"
           margin="dense"
+          error={missingName}
+          helperText={missingName ? "Please Enter Name" : ""}
         />
         <TextField
           className="textBox"
@@ -54,21 +61,14 @@ function Register() {
           label="Password"
           margin="dense"
           sx={{
-            mb: 2
+            mb: 2,
           }}
         />
         <Button className="gradient__btn register__btn" onClick={register}>
           Register
         </Button>
-        <Button
-          className="login__google"
-          onClick={signInWithGoogle}
-        >
-          <img
-            id="google_image"
-            src={google}
-            alt="google"
-          />
+        <Button className="login__google" onClick={signInWithGoogle}>
+          <img id="google_image" src={google} alt="google" />
           Register with Google
         </Button>
         <div>
