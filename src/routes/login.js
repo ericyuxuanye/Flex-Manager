@@ -59,12 +59,11 @@ function Login() {
         >
           Login
         </button>
-        <button className="btn login__google" onClick={signInWithGoogle}>
-          <img
-            id="google_image"
-            src={google}
-            alt="google"
-          />
+        <button
+          className="btn login__google"
+          onClick={() => signInWithGoogle(remember)}
+        >
+          <img id="google_image" src={google} alt="google" />
           &nbsp;Login with Google
         </button>
         <div>
