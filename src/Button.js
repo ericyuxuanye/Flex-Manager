@@ -24,11 +24,9 @@ class Button extends Component {
 
     target.appendChild(circle);
 
-    /*
     setTimeout(() => {
       circle.remove();
     }, 3000);
-    */
   }
   render() {
     return (
