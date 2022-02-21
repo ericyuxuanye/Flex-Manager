@@ -8,3 +8,9 @@
   background-size: 150% 100%;
   margin-left: 10px;
 }
+
+.default_class--textBox {
+  border-radius: 50px;
+  padding: 15px;
+  border: 1px solid #e8e8e8;
+}

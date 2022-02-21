@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import "./dashboard.css";
 import { auth, db, logout } from "../firebase";
 import { getDoc, doc } from "firebase/firestore";
+import Button from "../Button";
 function Dashboard() {
   const [user, loading, error] = useAuthState(auth);
   const [name, setName] = useState("");
@@ -13,7 +14,7 @@ function Dashboard() {
     try {
       const docSnap = await getDoc(doc(db, "users", user.uid));
       if (!docSnap.exists()) {
-        throw new Error("Cannot find document associated with user"); 
+        throw new Error("Cannot find document associated with user");
       }
       const data = docSnap.data();
       setName(data.name);
@@ -38,9 +39,9 @@ function Dashboard() {
         <div>{name}</div>
         <div>{user?.email}</div>
         <p>Default class: {defaultClass}</p>
-        <button className="btn gradient__btn dashboard__btn" onClick={logout}>
+        <Button className="gradient__btn dashboard__btn" onClick={logout}>
           Logout
-        </button>
+        </Button>
       </div>
     </div>
   );

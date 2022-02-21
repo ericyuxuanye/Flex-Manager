@@ -3,6 +3,7 @@ import { useAuthState } from "react-firebase-hooks/auth";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { auth, sendPasswordReset } from "../firebase";
+import Button from "../Button";
 import "./reset.css";
 function Reset() {
   const [email, setEmail] = useState("");
@@ -11,7 +12,7 @@ function Reset() {
   useEffect(() => {
     if (loading) return;
     if (user) navigate("/dashboard");
-  }, [user, loading]);
+  });
   return (
     <div className="middle">
       <h1 className="title1">Flex Manager</h1>
@@ -24,12 +25,12 @@ function Reset() {
           onChange={(e) => setEmail(e.target.value)}
           placeholder="E-mail Address"
         />
-        <button
-          className="btn gradient__btn reset__btn"
+        <Button
+          className="gradient__btn reset__btn"
           onClick={() => sendPasswordReset(email)}
         >
           Send password reset email
-        </button>
+        </Button>
         <div>
           Don't have an account? <Link to="/register">Register</Link> now.
         </div>

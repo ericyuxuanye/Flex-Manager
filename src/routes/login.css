@@ -1,9 +1,4 @@
 /* Login stuff */
-.login__remember {
-  padding: 10px;
-  margin-bottom: 10px;
-  text-align: left;
-}
 .login__btn {
   /* Our gradient */
   background: -webkit-gradient(
@@ -19,7 +14,7 @@
 .login__google {
   color: var(--text);
   background: white;
-  border: 1px solid #cccccc;
+  border: 1px solid #cccccc !important;
   z-index: 1;
   box-shadow: 0 23px 10px -15px rgb(0 0 0 / 0.2);
   -webkit-transition: all 0.2s;
