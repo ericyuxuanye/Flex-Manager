@@ -26,7 +26,7 @@ function Register() {
   return (
     <div className="middle">
       {/*replace with logo*/}
-      <h1 classname="title1">Flex Scheduler</h1>
+      <h1 className="title1">Flex Scheduler</h1>
       <div className="container">
         <h2 className="title2">Register</h2>
         <TextField

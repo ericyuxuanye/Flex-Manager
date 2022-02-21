@@ -13,7 +13,7 @@ function Dashboard() {
     try {
       const docSnap = await getDoc(doc(db, "users", user.uid));
       if (!docSnap.exists()) {
-        throw new Error("Cannot find document associated with user"); 
+        throw new Error("Cannot find document associated with user");
       }
       const data = docSnap.data();
       setName(data.name);

@@ -11,7 +11,7 @@ function Reset() {
   useEffect(() => {
     if (loading) return;
     if (user) navigate("/dashboard");
-  }, [user, loading]);
+  });
   return (
     <div className="middle">
       <h1 className="title1">Flex Manager</h1>

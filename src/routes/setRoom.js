@@ -48,11 +48,14 @@ function SetRoom() {
         <div className="setClassUserInput">
           <input
             type="number"
+            label="Default Class Number"
             placeholder="Default Class Number"
             onChange={(e) => setNumber(e.target.valueAsNumber)}
-            className="textBox"
+            className="default_class--textBox"
           />
-          <button onClick={submit} className="btn gradient__btn submit__btn">Submit</button>
+          <button onClick={submit} className="btn gradient__btn submit__btn">
+            Submit
+          </button>
         </div>
       </div>
     </div>
