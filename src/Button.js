@@ -8,8 +8,6 @@ class Button extends Component {
     this.innerDiv = React.createRef();
   }
   createRipple(event) {
-    console.log(event);
-
     const target = this.innerDiv.current;
     const button = event.currentTarget;
 
