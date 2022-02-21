@@ -48,7 +48,6 @@ function Login() {
         <FormControlLabel
           control={
             <Checkbox
-              defaultChecked
               onChange={(e) =>
                 setRemember(e.target.value === "unchecked" ? false : true)
               }
