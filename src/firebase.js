@@ -36,8 +36,12 @@ const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const db = getFirestore(app);
 const googleProvider = new GoogleAuthProvider();
-const signInWithGoogle = async () => {
+const signInWithGoogle = async (remember) => {
   try {
+    await setPersistence(
+      auth,
+      remember ? browserLocalPersistence : browserSessionPersistence
+    );
     const res = await signInWithPopup(auth, googleProvider);
     const user = res.user;
     const docSnap = await getDoc(doc(db, "users", user.uid));
@@ -56,7 +60,7 @@ const signInWithGoogle = async () => {
 };
 const logInWithEmailAndPassword = async (email, password, remember) => {
   try {
-    setPersistence(
+    await setPersistence(
       auth,
       remember ? browserLocalPersistence : browserSessionPersistence
     );
