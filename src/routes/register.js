@@ -8,6 +8,7 @@ import {
   signInWithGoogle,
 } from "../firebase";
 import google from "../google.svg";
+import Button from "../Button";
 import "./register.css";
 function Register() {
   const [email, setEmail] = useState("");
@@ -52,12 +53,15 @@ function Register() {
           onChange={(e) => setPassword(e.target.value)}
           label="Password"
           margin="dense"
+          sx={{
+            mb: 2
+          }}
         />
-        <button className="btn gradient__btn register__btn" onClick={register}>
+        <Button className="gradient__btn register__btn" onClick={register}>
           Register
-        </button>
-        <button
-          className="btn login__google"
+        </Button>
+        <Button
+          className="login__google"
           onClick={signInWithGoogle}
         >
           <img
@@ -66,7 +70,7 @@ function Register() {
             alt="google"
           />
           Register with Google
-        </button>
+        </Button>
         <div>
           Already have an account? <Link to="/">Login</Link> now.
         </div>

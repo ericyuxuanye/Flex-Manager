@@ -35,7 +35,7 @@ class Button extends Component {
       <button
         onMouseDown={this.createRipple}
         onClick={this.props.onClick}
-        className={`${this.props.className} btn`}
+        className={`btn ${this.props.className}`}
       >
         <div className="innerDiv" ref={this.innerDiv} />
         {this.props.children}

@@ -5,6 +5,7 @@ import { useAuthState } from "react-firebase-hooks/auth";
 import { Checkbox, FormControlLabel, TextField } from "@mui/material";
 import "./login.css";
 import google from "../google.svg";
+import Button from "../Button";
 function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -55,16 +56,19 @@ function Login() {
           }
           label="Remember me"
         />
-        <button
-          className="btn login__btn gradient__btn"
+        <Button
+          className="gradient__btn login__btn"
           onClick={() => logInWithEmailAndPassword(email, password, remember)}
         >
           Login
-        </button>
-        <button className="btn login__google" onClick={signInWithGoogle}>
+        </Button>
+        <Button
+          className="login__google"
+          onClick={() => signInWithGoogle(remember)}
+        >
           <img id="google_image" src={google} alt="google" />
-          Login with Google
-        </button>
+          &nbsp;Login with Google
+        </Button>
         <div>
           <Link to="/reset" style={linkStyle}>
             Forgot Password

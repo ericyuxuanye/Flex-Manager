@@ -4,6 +4,7 @@ import "./setRoom.css";
 import { setDefaultClass, auth, db } from "../firebase";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { getDoc, doc } from "firebase/firestore";
+import Button from "../Button";
 
 function SetRoom() {
   const [number, setNumber] = useState(NaN);
@@ -53,9 +54,9 @@ function SetRoom() {
             onChange={(e) => setNumber(e.target.valueAsNumber)}
             className="default_class--textBox"
           />
-          <button onClick={submit} className="btn gradient__btn submit__btn">
+          <Button onClick={submit} className="gradient__btn submit__btn">
             Submit
-          </button>
+          </Button>
         </div>
       </div>
     </div>
