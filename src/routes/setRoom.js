@@ -2,15 +2,17 @@ import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import "./setRoom.css";
 import { TextField } from "@mui/material";
-import { setDefaultClass, auth, db } from "../firebase";
+import { setDefaultClass, auth, db, DBState } from "../firebase";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { getDoc, doc } from "firebase/firestore";
+import { useRecoilValue } from "recoil";
 import Button from "../Button";
 
 function SetRoom() {
   const [number, setNumber] = useState(NaN);
   const navigate = useNavigate();
   const [user, loading, error] = useAuthState(auth);
+  const confirmDB = useRecoilValue(DBState);
   /* if user already has default class, navigate away */
   const fetchDefaultClass = async () => {
     try {
@@ -38,6 +40,7 @@ function SetRoom() {
 
   useEffect(() => {
     if (loading) return;
+    if (!confirmDB) return;
     if (!user) return navigate("/");
     fetchDefaultClass();
   });

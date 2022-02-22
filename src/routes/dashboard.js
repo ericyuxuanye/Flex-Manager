@@ -2,14 +2,16 @@ import React, { useEffect, useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useNavigate } from "react-router-dom";
 import "./dashboard.css";
-import { auth, db, logout } from "../firebase";
+import { auth, db, logout, DBState } from "../firebase";
 import { getDoc, doc } from "firebase/firestore";
 import Button from "../Button";
 import { CircularProgress } from "@mui/material";
+import { useRecoilValue } from "recoil";
 function Dashboard() {
   const [user, loading, error] = useAuthState(auth);
   const [name, setName] = useState("");
   const [defaultClass, setDefaultClass] = useState(NaN);
+  const confirmDB = useRecoilValue(DBState);
   const navigate = useNavigate();
   const fetchUserName = async () => {
     try {
@@ -30,6 +32,8 @@ function Dashboard() {
   useEffect(() => {
     if (loading) return;
     if (!user) return navigate("/");
+    // if we don't know the database is prepared yet, keep waiting
+    if (!confirmDB) return;
     // fetch user name after we are sure the user exists
     fetchUserName().then(() => setFetchingUserName(false));
   });
