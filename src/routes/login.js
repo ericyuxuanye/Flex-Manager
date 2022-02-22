@@ -21,9 +21,6 @@ function Login() {
   const [remember, setRemember] = useState(false);
   const [user, loading, error] = useAuthState(auth);
   const navigate = useNavigate();
-  const linkStyle = {
-    textDecoration: "none",
-  };
   useEffect(() => {
     if (loading) {
       // maybe trigger a loading screen
@@ -86,13 +83,13 @@ function Login() {
           Login with Google
         </Button>
         <div>
-          <Link to="/reset" style={linkStyle}>
+          <Link to="/reset" className="linkStyle">
             Forgot Password
           </Link>
         </div>
         <div>
           Don't have an account?{" "}
-          <Link to="/register" style={linkStyle}>
+          <Link to="/register" className="linkStyle">
             Register
           </Link>{" "}
           now.

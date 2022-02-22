@@ -36,10 +36,10 @@ function Reset() {
           Send password reset email
         </Button>
         <div>
-          Don't have an account? <Link to="/register">Register</Link> now.
+          Don't have an account? <Link to="/register" className="linkStyle">Register</Link> now.
         </div>
         <div>
-          Wrong place? Go to <Link to="/">Login</Link>.
+          Wrong place? Go to <Link to="/" className="linkStyle">Login</Link>.
         </div>
       </div>
     </div>

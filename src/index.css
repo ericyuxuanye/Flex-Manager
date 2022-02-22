@@ -39,3 +39,7 @@ body {
 .textBox input {
   background-color: white;
 }
+
+.linkStyle {
+  text-decoration: none;
+}
