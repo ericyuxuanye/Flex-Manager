@@ -3,6 +3,7 @@ import { useAuthState } from "react-firebase-hooks/auth";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { auth, sendPasswordReset } from "../firebase";
+import TextField from "@mui/material/TextField"
 import Button from "../Button";
 import "./reset.css";
 function Reset() {
@@ -18,12 +19,15 @@ function Reset() {
       <h1 className="title1">Flex Manager</h1>
       <div className="container">
         <h2 className="title2">Password Reset</h2>
-        <input
+        <TextField
           type="text"
-          className="textBox"
+          sx={{
+            backgroundColor: "white",
+            mb: 2
+          }}
           value={email}
           onChange={(e) => setEmail(e.target.value)}
-          placeholder="E-mail Address"
+          label="E-mail Address"
         />
         <Button
           className="gradient__btn reset__btn"
