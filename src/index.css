@@ -39,6 +39,8 @@ code {
   padding: 30px;
   outline: none;
 }
+/* Simple way to make the material textboxes have the
+ * background color that I want without complex theming 😁 */
 .textBox input {
   background-color: white;
 }

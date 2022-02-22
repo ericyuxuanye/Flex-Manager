@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { Link, useNavigate } from "react-router-dom";
-import { TextField } from "@mui/material";
+import { TextField, InputAdornment, IconButton } from "@mui/material";
+import Visibility from "@mui/icons-material/Visibility";
+import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import {
   auth,
   registerWithEmailAndPassword,
@@ -13,6 +15,7 @@ import "./register.css";
 function Register() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
   const [name, setName] = useState("");
   const [user, loading, error] = useAuthState(auth);
   const [missingName, setMissingName] = useState(false);
@@ -54,14 +57,26 @@ function Register() {
           margin="dense"
         />
         <TextField
-          className="textBox"
-          type="password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
+          id="password-textfield"
           label="Password"
+          value={password}
+          type={showPassword ? "text" : "password"}
+          onChange={(e) => setPassword(e.target.value)}
           margin="dense"
-          sx={{
-            mb: 2,
+          sx={{ backgroundColor: "white", mb: 2 }}
+          InputProps={{
+            endAdornment: (
+              <InputAdornment position="end">
+                <IconButton
+                  aria-label="toggle password visibility"
+                  onClick={(_) => setShowPassword(!showPassword)}
+                  onMouseDown={(e) => e.preventDefault()}
+                  edge="end"
+                >
+                  {showPassword ? <VisibilityOff /> : <Visibility />}
+                </IconButton>
+              </InputAdornment>
+            ),
           }}
         />
         <Button className="gradient__btn register__btn" onClick={register}>

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import "./setRoom.css";
+import { TextField } from "@mui/material";
 import { setDefaultClass, auth, db } from "../firebase";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { getDoc, doc } from "firebase/firestore";
@@ -47,12 +48,16 @@ function SetRoom() {
       <div className="container">
         <h2 className="title2">Please set your default Class</h2>
         <div className="setClassUserInput">
-          <input
+          <TextField
             type="number"
-            label="Default Class Number"
-            placeholder="Default Class Number"
+            label="Default Class"
+            placeholder="Default Class"
             onChange={(e) => setNumber(e.target.valueAsNumber)}
-            className="default_class--textBox"
+            className="textBox"
+            inputProps={{
+              onInput: (e) =>
+                (e.target.value = e.target.value.replace(/(?![0-9])./gim, "")),
+            }}
           />
           <Button onClick={submit} className="gradient__btn submit__btn">
             Submit
