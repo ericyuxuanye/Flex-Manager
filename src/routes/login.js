@@ -83,7 +83,7 @@ function Login() {
           onClick={() => signInWithGoogle(remember)}
         >
           <img id="google_image" src={google} alt="google" />
-          &nbsp;Login with Google
+          Login with Google
         </Button>
         <div>
           <Link to="/reset" style={linkStyle}>
