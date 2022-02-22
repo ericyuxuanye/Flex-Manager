@@ -14,13 +14,9 @@ import {
 } from "firebase/auth";
 import {
   getFirestore,
-  query,
-  getDocs,
   getDoc,
   doc,
   setDoc,
-  collection,
-  where,
   updateDoc,
 } from "firebase/firestore";
 const firebaseConfig = {

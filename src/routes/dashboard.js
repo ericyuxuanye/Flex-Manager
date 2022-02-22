@@ -5,6 +5,7 @@ import "./dashboard.css";
 import { auth, db, logout } from "../firebase";
 import { getDoc, doc } from "firebase/firestore";
 import Button from "../Button";
+import { CircularProgress } from "@mui/material";
 function Dashboard() {
   const [user, loading, error] = useAuthState(auth);
   const [name, setName] = useState("");
@@ -19,30 +20,37 @@ function Dashboard() {
       const data = docSnap.data();
       setName(data.name);
       setDefaultClass(data.defaultClass);
+      if (defaultClass === undefined) navigate("/setRoom");
     } catch (err) {
       console.error(err);
       alert("An error occured while fetching user data");
     }
   };
+  const [fetchingUserName, setFetchingUserName] = useState(true);
   useEffect(() => {
     if (loading) return;
     if (!user) return navigate("/");
-    if (defaultClass === undefined) return navigate("/setRoom");
     // fetch user name after we are sure the user exists
-    fetchUserName();
+    fetchUserName().then(() => setFetchingUserName(false));
   });
   return (
     <div className="middle">
-      <h1 className="title1">Dashboard</h1>
-      <div className="container">
-        Logged in as
-        <div>{name}</div>
-        <div>{user?.email}</div>
-        <p>Default class: {defaultClass}</p>
-        <Button className="gradient__btn dashboard__btn" onClick={logout}>
-          Logout
-        </Button>
-      </div>
+      <h1 className="title1">
+        {fetchingUserName ? "Please Wait" : "Dashboard"}
+      </h1>
+      {fetchingUserName ? (
+        <CircularProgress />
+      ) : (
+        <div className="container">
+          Logged in as
+          <div>{name}</div>
+          <div>{user?.email}</div>
+          <p>Default class: {defaultClass}</p>
+          <Button className="gradient__btn dashboard__btn" onClick={logout}>
+            Logout
+          </Button>
+        </div>
+      )}
     </div>
   );
 }
