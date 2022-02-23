@@ -22,7 +22,7 @@
 }
 
 .dashboard__userinfo {
-  position: fixed;
+  position: absolute;
   right: 3em;
   top: 5em;
   z-index: 1;
