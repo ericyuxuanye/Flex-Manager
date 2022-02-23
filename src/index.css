@@ -11,7 +11,7 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
-.title1 .title2 {
+.title1,.title2 {
   display: block;
 }
 /* Fill screen and put stuff in middle */
