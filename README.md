@@ -1,6 +1,22 @@
-# Getting Started with Create React App
+# flex-manager
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+
+## Setting up dev environment
+
+First, install node js from [https://nodejs.org/en/](https://nodejs.org/en/).
+
+Once you have node js installed, use either git or GitHub desktop to clone this directory. If you use git, type:
+
+```
+git clone https://github.com/ericyuxuanye/flex-manager
+```
+
+Then, navigate to the project directory and type:
+
+```
+npm install
+```
 
 ## Available Scripts
 
