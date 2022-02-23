@@ -1,27 +1,27 @@
 .Banner__banner {
-	width: 100vw;
-	display: flex;
-	z-index: 1;
-	position: sticky;
-	top: 0;
-	box-shadow: 0 3px 5px gray;
-	background: white;
+  width: 100vw;
+  display: flex;
+  z-index: 1;
+  position: sticky;
+  top: 0;
+  box-shadow: 0 3px 5px gray;
+  background: white;
 }
 
 .Banner__navigation {
-	display: inline-block;
-	flex-grow: 1;
-	text-align: center;
-	line-height: 4em;
+  display: inline-block;
+  flex-grow: 1;
+  text-align: center;
+  line-height: 4em;
 }
 .Banner__spacer {
-	width: 6em;
+  width: 6em;
 }
 .Banner__logo {
-	position: absolute;
-	height: 6em;
-	width: 6em;
-	left: 0;
-	top: 0;
-	border: 1px solid black;
+  position: absolute;
+  height: 6em;
+  width: 6em;
+  left: 0;
+  top: 0;
+  border: 1px solid black;
 }
