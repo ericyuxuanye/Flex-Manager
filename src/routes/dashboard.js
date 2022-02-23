@@ -3,6 +3,7 @@ import { useAuthState } from "react-firebase-hooks/auth";
 import { useNavigate } from "react-router-dom";
 import "./dashboard.css";
 import { auth, db, logout, DBState } from "../firebase";
+import Banner from "../Banner";
 import { getDoc, doc } from "firebase/firestore";
 import Button from "../Button";
 import { CircularProgress } from "@mui/material";
@@ -37,24 +38,33 @@ function Dashboard() {
     // fetch user name after we are sure the user exists
     fetchUserName().then(() => setFetchingUserName(false));
   });
-  return (
+  return fetchingUserName ? (
     <div className="middle">
-      <h1 className="title1">
-        {fetchingUserName ? "Please Wait" : "Dashboard"}
+      <h1 className="title1">Please Wait</h1>
+      <CircularProgress />
+    </div>
+  ) : (
+    <div>
+      <Banner />
+      <h1 className="dashboard__welcome">
+        Welcome to flex-manager
       </h1>
-      {fetchingUserName ? (
-        <CircularProgress />
-      ) : (
-        <div className="container">
-          Logged in as
-          <div>{name}</div>
-          <div>{user?.email}</div>
-          <p>Default class: {defaultClass}</p>
-          <Button className="gradient__btn dashboard__btn" onClick={logout}>
-            Logout
-          </Button>
-        </div>
-      )}
+      <h2 className="dashboard__description">What are you here for today?</h2>
+      <div className="dashboard__userinfo">
+        <p>Hello, {name}</p>
+        <p>Default class: {defaultClass}</p>
+      </div>
+      <div className="dashboard__cards">
+        <Button className="dashboard__card"></Button>
+        <Button className="dashboard__card"></Button>
+        <Button className="dashboard__card"></Button>
+        <Button className="dashboard__card"></Button>
+        <Button className="dashboard__card"></Button>
+        <Button className="dashboard__card"></Button>
+      </div>
+      <Button className="gradient__btn logout__btn" onClick={logout}>
+        Logout
+      </Button>
     </div>
   );
 }

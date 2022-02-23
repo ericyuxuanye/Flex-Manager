@@ -13,6 +13,7 @@ body {
 }
 .title1,.title2 {
   display: block;
+  color: var(--text)
 }
 /* Fill screen and put stuff in middle */
 .middle {

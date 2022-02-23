@@ -1,4 +1,7 @@
-.dashboard__btn {
+.logout__btn {
+  position: fixed;
+  right: 2em;
+  bottom: 2em;
   background: rgb(167, 0, 201);
   background: linear-gradient(
     90deg,
@@ -6,4 +9,45 @@
     rgba(159, 0, 0, 1) 66%
   );
   background-size: 150% 100%;
+}
+
+.dashboard__welcome {
+  text-align: center;
+  display: block;
+}
+
+.dashboard__description {
+  text-align: center;
+  color: var(--text);
+}
+
+.dashboard__userinfo {
+  position: fixed;
+  right: 3em;
+  top: 5em;
+  z-index: 1;
+}
+
+.dashboard__cards {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2em;
+  justify-content: center;
+  margin-left: 5em;
+  margin-right: 5em;
+}
+
+.dashboard__card {
+  width: 30em;
+  height: 30em;
+  background-color: #f8f8f8;
+  box-shadow: 2px 2px 5px #e8e8e8;
+  padding: 30px;
+  outline: none;
+  transition: box-shadow 600ms;
+}
+
+.dashboard__card:hover {
+  box-shadow: 4px 4px 10px gray;
+  cursor: pointer;
 }
