@@ -3,7 +3,7 @@ import { logout } from "../firebase";
 import Button from "../Button";
 import "./HomeScreen.css";
 
-function HomeScreen(props) {
+function HomeScreen() {
   return (
     <div>
       <h1 className="dashboard__welcome">Welcome to flex-manager</h1>

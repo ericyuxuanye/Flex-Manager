@@ -1,9 +1,8 @@
 import React, { useEffect, useState, useCallback } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useNavigate } from "react-router-dom";
-import Button from "../Button";
 import "./dashboard.css";
-import { auth, db, DBState, logout } from "../firebase";
+import { auth, db, DBState } from "../firebase";
 import { getDoc, doc } from "firebase/firestore";
 import HomeScreen from "../pages/HomeScreen";
 import {
@@ -31,7 +30,7 @@ function stringToColor(string) {
 
   for (i = 0; i < 3; i += 1) {
     const value = (hash >> (i * 8)) & 0xff;
-    color += `00${value.toString(16)}`.substr(-2);
+    color += `00${value.toString(16)}`.substring(-2);
   }
   /* eslint-enable no-bitwise */
 
@@ -166,7 +165,7 @@ function Dashboard() {
       <Routes>
         <Route
           path="/*"
-          element={<HomeScreen name={name} defaultClass={defaultClass} />}
+          element={<HomeScreen />}
         />
       </Routes>
     </div>
