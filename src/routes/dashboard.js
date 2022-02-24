@@ -44,7 +44,7 @@ function Dashboard() {
     </div>
   ) : (
     <div>
-      <Banner />
+      <Banner name={name}/>
       <h1 className="dashboard__welcome">
         Welcome to flex-manager
       </h1>

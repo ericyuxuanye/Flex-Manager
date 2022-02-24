@@ -4,7 +4,8 @@
   z-index: 2;
   position: sticky;
   top: 0;
-  box-shadow: 0 3px 5px gray;
+  justify-content: center;
+  box-shadow: 0 3px 5px #e8e8e8;
   background: white;
 }
 
@@ -24,4 +25,9 @@
   left: 0;
   top: 0;
   border: 1px solid black;
+}
+
+.avatar {
+  margin: auto;
+  margin-right: 1em;
 }
