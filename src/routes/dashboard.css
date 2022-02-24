@@ -41,13 +41,13 @@
   width: 30em;
   height: 30em;
   background-color: #f8f8f8;
-  box-shadow: 2px 2px 5px #e8e8e8;
+  box-shadow: 0px 0px 10px 0px #e8e8e8;
   padding: 30px;
   outline: none;
   transition: box-shadow 600ms;
 }
 
 .dashboard__card:hover {
-  box-shadow: 4px 4px 10px gray;
+  box-shadow: 0px 0px 20px gray;
   cursor: pointer;
 }
