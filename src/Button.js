@@ -12,7 +12,7 @@ class Button extends Component {
     const button = event.currentTarget;
 
     // get viewport
-    var rect = event.target.getBoundingClientRect();
+    var rect = button.getBoundingClientRect();
     const circle = document.createElement("span");
     const diameter = Math.max(button.clientWidth, button.clientHeight);
     const radius = diameter / 2;
