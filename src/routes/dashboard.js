@@ -40,7 +40,6 @@ function Dashboard() {
   });
   return fetchingUserName ? (
     <div className="middle">
-      <h1 className="title1">Please Wait</h1>
       <CircularProgress />
     </div>
   ) : (
