@@ -2,9 +2,12 @@ import React, { useEffect, useState, useCallback } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useNavigate } from "react-router-dom";
 import "./dashboard.css";
-import { auth, db, DBState } from "../firebase";
+import { auth, db, DBState, logout } from "../firebase";
 import { getDoc, doc } from "firebase/firestore";
 import HomeScreen from "../pages/HomeScreen";
+import Messages from "../pages/Messages";
+import Button from "../Button";
+import Settings from "@mui/icons-material/Settings"
 import {
   CircularProgress,
   Avatar,
@@ -12,7 +15,10 @@ import {
   Tab,
   Typography,
   Box,
-  Popover,
+  Menu,
+  MenuItem,
+  Divider,
+  ListItemIcon
 } from "@mui/material";
 import { useRecoilValue } from "recoil";
 import { Route, Routes, Link } from "react-router-dom";
@@ -99,45 +105,35 @@ function Dashboard() {
   ) : (
     <div>
       <div className="Banner__banner">
-        <div className="Banner__logo" onClick={(e) => navigate("/dashboard")}>
-        </div>
+        <div
+          className="Banner__logo"
+          onClick={(e) => navigate("/dashboard")}
+        ></div>
         <div className="Banner__spacer"></div>
         <Box sx={{ flexGrow: 1 }}>
           <Tabs value={value} aria-label="basic tabs example" centered>
             <Tab
-              label="Link1"
-              value="/dashboard/link1"
-              to="/dashboard/link1"
+              label="View Schedule"
+              value="/dashboard/view_schedule"
+              to="/dashboard/view_schedule"
               component={Link}
             />
             <Tab
-              label="Link2"
-              value="/dashboard/link2"
-              to="/dashboard/link2"
+              label="Edit Schedule"
+              value="/dashboard/edit_schedule"
+              to="/dashboard/edit_schedule"
               component={Link}
             />
             <Tab
-              label="Link3"
-              value="/dashboard/link3"
-              to="/dashboard/link3"
+              label="Messages"
+              value="/dashboard/messages"
+              to="/dashboard/messages"
               component={Link}
             />
             <Tab
-              label="Link4"
-              value="/dashboard/link4"
-              to="/dashboard/link4"
-              component={Link}
-            />
-            <Tab
-              label="Link5"
-              value="/dashboard/link5"
-              to="/dashboard/link5"
-              component={Link}
-            />
-            <Tab
-              label="Link6"
-              value="/dashboard/link6"
-              to="/dashboard/link6"
+              label="Account Settings"
+              value="/dashboard/account_settings"
+              to="/dashboard/account_settings"
               component={Link}
             />
           </Tabs>
@@ -147,7 +143,7 @@ function Dashboard() {
           {...stringAvatar(name)}
           onClick={handleOpen}
         />
-        <Popover
+        <Menu
           open={open}
           anchorEl={anchorEl}
           onClose={handleClose}
@@ -156,17 +152,27 @@ function Dashboard() {
             horizontal: "left",
           }}
         >
-          <Typography sx={{ p: 2 }}>
-            <p>Hello, {name}</p>
+          <Typography sx={{ p: 2, color: "#616161" }}>
+            <p>
+              Hello, <b>{name}</b>
+            </p>
             <p>Default class: {defaultClass}</p>
           </Typography>
-        </Popover>
+          <Divider />
+          <MenuItem onClick={() => navigate("/dashboard/account_settings")}>
+            <ListItemIcon>
+              <Settings fontSize="small" />
+            </ListItemIcon>
+            Account Settings
+          </MenuItem>
+        </Menu>
       </div>
+      <Button className="gradient__btn logout__btn" onClick={logout}>
+        Logout
+      </Button>
       <Routes>
-        <Route
-          path="/*"
-          element={<HomeScreen />}
-        />
+        <Route path="/messages" element={<Messages />} />
+        <Route path="/*" element={<HomeScreen />} />
       </Routes>
     </div>
   );

@@ -38,3 +38,16 @@
   margin-right: 1em;
   cursor: pointer;
 }
+
+.logout__btn {
+  position: fixed;
+  right: 2em;
+  bottom: 2em;
+  background: rgb(167, 0, 201);
+  background: linear-gradient(
+    90deg,
+    rgba(167, 0, 201, 1) 19%,
+    rgba(159, 0, 0, 1) 66%
+  );
+  background-size: 150% 100%;
+}
