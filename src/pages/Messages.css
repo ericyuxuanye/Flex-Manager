@@ -6,3 +6,13 @@
   text-align: center;
   color: #616161;
 }
+
+.Messages__container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  width: 100vw;
+  /* Change this if the top height changes */
+  height: calc(100vh - 134px);
+}
