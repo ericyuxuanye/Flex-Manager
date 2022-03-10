@@ -1,4 +1,48 @@
-.dashboard__btn {
+.Banner__banner {
+  width: 100vw;
+  display: flex;
+  z-index: 2;
+  position: sticky;
+  top: 0;
+  justify-content: center;
+  box-shadow: 0 3px 5px #e8e8e8;
+  background: white;
+}
+
+.Banner__navigation {
+  display: inline-block;
+  flex-grow: 1;
+  text-align: center;
+  line-height: 4em;
+}
+.Banner__spacer {
+  width: 8em;
+}
+.Banner__logo {
+  position: absolute;
+  height: 8em;
+  width: 8em;
+  left: 0;
+  top: 0;
+  border: 1px solid #e8e8e8;
+  border-radius: 50px;
+  box-shadow: 0 0 5px #e8e8e8;
+  margin-left: 1em;
+  cursor: pointer;
+  background-image: url("../Logo-01.jpg");
+  background-size: 100% 100%;
+}
+
+.avatar {
+  margin: auto;
+  margin-right: 1em;
+  cursor: pointer;
+}
+
+.logout__btn {
+  position: fixed;
+  right: 2em;
+  bottom: 2em;
   background: rgb(167, 0, 201);
   background: linear-gradient(
     90deg,

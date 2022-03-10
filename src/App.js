@@ -10,17 +10,15 @@ function App() {
   return (
     <RecoilRoot>
       <RecoilNexus />
-      <div className="app">
         <Router>
           <Routes>
             <Route exact path="/" element={<Login />} />
             <Route exact path="/register" element={<Register />} />
             <Route exact path="/reset" element={<Reset />} />
-            <Route exact path="/dashboard" element={<Dashboard />} />
+            <Route path="/dashboard/*" element={<Dashboard />} />
             <Route exact path="/setRoom" element={<SetRoom />} />
           </Routes>
         </Router>
-      </div>
     </RecoilRoot>
   );
 }

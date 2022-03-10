@@ -33,7 +33,7 @@ function SetRoom() {
   const submit = async () => {
     if (!Number.isNaN(number)) {
       await setDefaultClass(number);
-      navigate("/Dashboard");
+      navigate("/dashboard");
     }
   };
 

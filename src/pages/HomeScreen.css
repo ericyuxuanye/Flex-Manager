@@ -1,0 +1,38 @@
+
+.dashboard__welcome {
+  text-align: center;
+  display: block;
+}
+
+.dashboard__description {
+  text-align: center;
+  color: var(--text);
+}
+
+.dashboard__cards {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2em;
+  justify-content: center;
+  margin-left: 5em;
+  margin-right: 5em;
+}
+
+.dashboard__card {
+  width: 20em;
+  height: 20em;
+  background-color: #f8f8f8;
+  box-shadow: 0px 0px 10px 0px #e8e8e8;
+  padding: 30px;
+  outline: none;
+  transition: box-shadow 600ms;
+}
+
+.dashboard__card:hover {
+  box-shadow: 0px 0px 20px gray;
+  cursor: pointer;
+}
+
+.HomeScreen__icon {
+  height: 200px;
+}
