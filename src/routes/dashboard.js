@@ -6,8 +6,8 @@ import { auth, db, DBState, logout } from "../firebase";
 import { getDoc, doc } from "firebase/firestore";
 import HomeScreen from "../pages/HomeScreen";
 import Messages from "../pages/Messages";
-import Button from "../Button";
-import Settings from "@mui/icons-material/Settings"
+import Settings from "@mui/icons-material/Settings";
+import Logout from "@mui/icons-material/Logout";
 import {
   CircularProgress,
   Avatar,
@@ -18,7 +18,7 @@ import {
   Menu,
   MenuItem,
   Divider,
-  ListItemIcon
+  ListItemIcon,
 } from "@mui/material";
 import { useRecoilValue } from "recoil";
 import { Route, Routes, Link } from "react-router-dom";
@@ -152,7 +152,15 @@ function Dashboard() {
             horizontal: "left",
           }}
         >
-          <Typography sx={{ p: 2, color: "#616161" }}>
+          <Typography
+            sx={{
+              p: 2,
+              color: "#616161",
+              lineHeight: "1em",
+              paddingTop: 0,
+              paddingBottom: 0,
+            }}
+          >
             <p>
               Hello, <b>{name}</b>
             </p>
@@ -165,11 +173,14 @@ function Dashboard() {
             </ListItemIcon>
             Account Settings
           </MenuItem>
+          <MenuItem onClick={() => logout()}>
+            <ListItemIcon>
+              <Logout fontSize="small" />
+            </ListItemIcon>
+            Sign out
+          </MenuItem>
         </Menu>
       </div>
-      <Button className="gradient__btn logout__btn" onClick={logout}>
-        Logout
-      </Button>
       <Routes>
         <Route path="/messages" element={<Messages />} />
         <Route path="/*" element={<HomeScreen />} />
