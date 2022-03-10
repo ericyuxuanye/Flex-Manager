@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Button from "../Button";
 import { useNavigate } from "react-router-dom";
-import Calendar from "../calendar-events-svgrepo-com.svg";
+import Calendar from "../calendar-svgrepo-com.svg";
 import Edit from "../edit-svgrepo-com.svg";
 import Message from "../message-svgrepo-com.svg";
 import Settings from "../settings-tools-and-utensils-svgrepo-com.svg";
