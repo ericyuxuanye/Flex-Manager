@@ -43,7 +43,6 @@ function stringToColor(string) {
     color += `00${value.toString(16)}`.slice(-2);
   }
   /* eslint-enable no-bitwise */
-  console.log(luminance);
   return [luminance < 150 ? "white" : "black", color];
 }
 
