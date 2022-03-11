@@ -6,6 +6,7 @@ import { auth, db, DBState, logout } from "../firebase";
 import { getDoc, doc } from "firebase/firestore";
 import HomeScreen from "../pages/HomeScreen";
 import Messages from "../pages/Messages";
+import Account from "../pages/Account";
 import Settings from "@mui/icons-material/Settings";
 import Logout from "@mui/icons-material/Logout";
 import {
@@ -183,6 +184,7 @@ function Dashboard() {
       </div>
       <Routes>
         <Route path="/messages" element={<Messages />} />
+        <Route path="/account_settings" element={<Account user={user}/>} />
         <Route path="/*" element={<HomeScreen />} />
       </Routes>
     </div>

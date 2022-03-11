@@ -1,0 +1,25 @@
+.Account__panel {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex-grow: 1;
+  row-gap: 2em;
+}
+
+.Account__center {
+  text-align: center;
+}
+
+.Account__flex-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.Account__container {
+  width: 30em;
+}
+
+.Account__lightgray {
+  color: #616161;
+}
