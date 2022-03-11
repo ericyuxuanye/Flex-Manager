@@ -34,20 +34,25 @@ function stringToColor(string) {
   }
 
   let color = "#";
+  let multipliers = [0.2126, 0.7152, 0.0722];
+  let luminance = 0;
 
   for (i = 0; i < 3; i += 1) {
     const value = (hash >> (i * 8)) & 0xff;
+    luminance += value * multipliers[i];
     color += `00${value.toString(16)}`.slice(-2);
   }
   /* eslint-enable no-bitwise */
-
-  return color;
+  console.log(luminance);
+  return [luminance < 150 ? "white" : "black", color];
 }
 
 function stringAvatar(name) {
+  let [foreground, background] = stringToColor(name);
   return {
     sx: {
-      bgcolor: stringToColor(name),
+      bgcolor: background,
+      color: foreground,
     },
     children: `${name.split(" ")[0][0]}${name.split(" ")[1][0]}`,
   };
@@ -108,7 +113,7 @@ function Dashboard() {
       <div className="Banner__banner">
         <div
           className="Banner__logo"
-          onClick={(e) => navigate("/dashboard")}
+          onClick={() => navigate("/dashboard")}
         ></div>
         <div className="Banner__spacer"></div>
         <Box sx={{ flexGrow: 1 }}>
@@ -184,7 +189,10 @@ function Dashboard() {
       </div>
       <Routes>
         <Route path="/messages" element={<Messages />} />
-        <Route path="/account_settings" element={<Account user={user}/>} />
+        <Route
+          path="/account_settings"
+          element={<Account defaultClass={defaultClass} />}
+        />
         <Route path="/*" element={<HomeScreen />} />
       </Routes>
     </div>

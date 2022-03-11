@@ -11,21 +11,6 @@ function Account(props) {
   const [showPassword, setShowPassword] = useState(false);
   const [password, setPassword] = useState("");
   const [defaultClass, setDefaultClass] = useState("");
-  const [currentDefaultClass, setCurrentDefaultClass] = useState("")
-  const fetchDefaultClass = async () => {
-    try {
-      const docSnap = await getDoc(doc(db, "users", props.user.uid));
-      if (!docSnap.exists()) {
-        throw new Error("Cannot find document associated with user");
-      }
-      const data = docSnap.data();
-      setCurrentDefaultClass(data.defaultClass)
-    } catch (err) {
-      console.error(err);
-      alert("An error occurred while fetching user data");
-    }
-  };
-  fetchDefaultClass();
   return (
     <div className="Account__panel">
       <h1 className="Account__center">Account Settings</h1>
@@ -34,7 +19,7 @@ function Account(props) {
       </h2>
       <section className="container Account__container">
         <h2 className="Account__center">Default Class</h2>
-        <p className="Account__lightgray">Current: {currentDefaultClass}</p>
+        <p className="Account__lightgray">Current: {props.defaultClass}</p>
         <div className="Account__flex-row">
           <TextField
             type="number"
