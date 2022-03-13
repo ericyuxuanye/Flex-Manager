@@ -161,13 +161,9 @@ function Dashboard() {
               p: 2,
               color: "#616161",
               lineHeight: "1em",
-              paddingTop: 0,
-              paddingBottom: 0,
             }}
           >
-            <p>
-              Hello, <b>{name}</b>
-            </p>
+            Hello, <b>{name}</b>
           </Typography>
           <Divider />
           <MenuItem onClick={() => navigate("/dashboard/account_settings")}>
@@ -186,10 +182,7 @@ function Dashboard() {
       </div>
       <Routes>
         <Route path="/messages" element={<Messages />} />
-        <Route
-          path="/account_settings"
-          element={<Account />}
-        />
+        <Route path="/account_settings" element={<Account />} />
         <Route path="/*" element={<HomeScreen />} />
       </Routes>
     </>

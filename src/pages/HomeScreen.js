@@ -11,7 +11,7 @@ function HomeScreen() {
   const navigate = useNavigate();
   return (
     <div>
-      <h1 className="dashboard__welcome">Welcome to flex-manager</h1>
+      <h1 className="dashboard__welcome">Welcome to Fancy Flex</h1>
       <h2 className="dashboard__description">What are you here for today?</h2>
       <div className="dashboard__cards">
         <Button

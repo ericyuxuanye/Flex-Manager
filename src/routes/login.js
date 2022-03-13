@@ -14,6 +14,7 @@ import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import "./login.css";
 import google from "../google.svg";
 import Button from "../Button";
+import Logo from "../logo.svg";
 function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -31,7 +32,7 @@ function Login() {
   return (
     <div className="middle">
       {/*replace with logo*/}
-      <h1 className="title1">Flex Scheduler</h1>
+      <img src={Logo} alt="Fancy Flex" height="200"/>
       <div className="container">
         <h2 className="title2">Log In</h2>
         <TextField

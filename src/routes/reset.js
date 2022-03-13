@@ -6,6 +6,7 @@ import { auth, sendPasswordReset } from "../firebase";
 import TextField from "@mui/material/TextField"
 import Button from "../Button";
 import "./reset.css";
+import Logo from "../logo.svg";
 function Reset() {
   const [email, setEmail] = useState("");
   const [user, loading, error] = useAuthState(auth);
@@ -16,7 +17,7 @@ function Reset() {
   });
   return (
     <div className="middle">
-      <h1 className="title1">Flex Manager</h1>
+      <img src={Logo} alt="Fancy Flex" height="200" />
       <div className="container">
         <h2 className="title2">Password Reset</h2>
         <TextField
