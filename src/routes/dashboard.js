@@ -23,6 +23,7 @@ import {
 } from "@mui/material";
 import { useRecoilValue } from "recoil";
 import { Route, Routes, Link } from "react-router-dom";
+import Logo from "../logo.svg";
 
 function stringToColor(string) {
   let hash = 0;
@@ -107,11 +108,12 @@ function Dashboard() {
   ) : (
     <>
       <div className="Banner__banner">
-        <div
+        <img
           className="Banner__logo"
           onClick={() => navigate("/dashboard")}
-        ></div>
-        <div className="Banner__spacer"></div>
+          alt="logo"
+          src={Logo}
+        />
         <Box sx={{ flexGrow: 1 }}>
           <Tabs value={value} aria-label="basic tabs example" centered>
             <Tab

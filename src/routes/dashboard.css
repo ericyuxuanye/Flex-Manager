@@ -15,9 +15,6 @@
   text-align: center;
   line-height: 4em;
 }
-.Banner__spacer {
-  width: 8em;
-}
 .Banner__logo {
   position: absolute;
   height: 8em;
@@ -29,8 +26,6 @@
   box-shadow: 0 0 5px #e8e8e8;
   margin-left: 1em;
   cursor: pointer;
-  background-image: url("../Logo-01.jpg");
-  background-size: 100% 100%;
 }
 
 .avatar {
