@@ -18,6 +18,8 @@ import {
   doc,
   setDoc,
   updateDoc,
+  getDocs,
+  collection,
 } from "firebase/firestore";
 import { atom } from "recoil";
 import { setRecoil } from "recoil-nexus";
@@ -119,7 +121,21 @@ const setDefaultClass = async (classId) => {
   });
 };
 
+let availableClasses = null;
+
+const getAvailableClasses = async () => {
+  if (availableClasses == null) {
+    availableClasses = [];
+    const query = await getDocs(collection(db, "courses"));
+    query.forEach((doc) => {
+      availableClasses.push(doc);
+    });
+  }
+  return availableClasses;
+}
+
 export {
+  getAvailableClasses,
   auth,
   db,
   signInWithGoogle,

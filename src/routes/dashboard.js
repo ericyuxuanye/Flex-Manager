@@ -66,7 +66,6 @@ function checkPathValue() {
 function Dashboard() {
   const [user, loading, error] = useAuthState(auth);
   const [name, setName] = useState("");
-  const [defaultClass, setDefaultClass] = useState(NaN);
   const confirmDB = useRecoilValue(DBState);
   const navigate = useNavigate();
   const fetchUserName = useCallback(async () => {
@@ -77,13 +76,11 @@ function Dashboard() {
       }
       const data = docSnap.data();
       setName(data.name);
-      setDefaultClass(data.defaultClass);
-      if (defaultClass === undefined) navigate("/setRoom");
     } catch (err) {
       console.error(err);
       alert("An error occured while fetching user data");
     }
-  }, [user, defaultClass, navigate]);
+  }, [user, navigate]);
   const [fetchingUserName, setFetchingUserName] = useState(true);
   const [value, setValue] = useState(false);
   const [anchorEl, setAnchorEl] = useState(null);
@@ -108,7 +105,7 @@ function Dashboard() {
       <CircularProgress />
     </div>
   ) : (
-    <div>
+    <>
       <div className="Banner__banner">
         <div
           className="Banner__logo"
@@ -169,7 +166,6 @@ function Dashboard() {
             <p>
               Hello, <b>{name}</b>
             </p>
-            <p>Default class: {defaultClass}</p>
           </Typography>
           <Divider />
           <MenuItem onClick={() => navigate("/dashboard/account_settings")}>
@@ -190,11 +186,11 @@ function Dashboard() {
         <Route path="/messages" element={<Messages />} />
         <Route
           path="/account_settings"
-          element={<Account defaultClass={defaultClass} />}
+          element={<Account />}
         />
         <Route path="/*" element={<HomeScreen />} />
       </Routes>
-    </div>
+    </>
   );
 }
 export default Dashboard;

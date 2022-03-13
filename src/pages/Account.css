@@ -23,3 +23,23 @@
 .Account__lightgray {
   color: #616161;
 }
+
+.Account__scrollbox {
+  max-height: 12em;
+  background-color: white;
+  margin-bottom: 1em;
+  overflow: scroll;
+  text-align: left;
+  padding-left: 1em;
+  padding-right: 1em;
+}
+
+.submit__btn {
+  background: rgb(45, 172, 0);
+  background: linear-gradient(
+    90deg,
+    rgba(45, 172, 0, 1) 31%,
+    rgba(179, 255, 0, 1) 95%
+  );
+  background-size: 150% 100%;
+}
