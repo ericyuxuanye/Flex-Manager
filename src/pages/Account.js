@@ -16,7 +16,12 @@ import { useTheme } from "@mui/material/styles";
 import { VisibilityOff, Visibility, Search } from "@mui/icons-material";
 import Button from "../Button";
 import "./Account.css";
-import { getAvailableClasses } from "../firebase";
+import {
+  getAvailableClasses,
+  setUserPassword,
+  getUserClasses,
+  setUserClasses,
+} from "../firebase";
 
 const ITEM_HEIGHT = 48;
 const ITEM_PADDING_TOP = 8;
@@ -46,7 +51,9 @@ function Account() {
   const theme = useTheme();
   const [showPassword, setShowPassword] = useState(false);
   const [password, setPassword] = useState("");
-  const [selectedClasses, setSelectedClasses] = useState(["Math", "Science"]);
+  const [showOldPassword, setShowOldPassword] = useState(false);
+  const [oldPassword, setOldPassword] = useState("");
+  const [selectedClasses, setSelectedClasses] = useState([]);
   const [classes, setClasses] = useState([]);
   const [searchText, setSearchText] = useState("");
   const handleChange = (event) => {
@@ -63,12 +70,13 @@ function Account() {
     () => classes.filter((option) => containsText(option, searchText)),
     [searchText, classes]
   );
-  // fetch classes once
+  // fetch classes and selected classes once
   useEffect(() => {
     (async () => {
       const docs = await getAvailableClasses();
       setClasses(docs.map((d) => d.id));
     })();
+    (async () => setSelectedClasses(await getUserClasses()))();
   }, []);
   return (
     <div className="Account__panel">
@@ -79,7 +87,7 @@ function Account() {
       <section className="container Account__container">
         <h2 className="Account__center">Favorite Classes</h2>
         <div className="Account__flex-row">
-          <FormControl sx={{ m: 1, width: 300 }}>
+          <FormControl sx={{ m: 1, width: 300, mb: 2 }}>
             <InputLabel id="demo-multiple-chip-label">Classes</InputLabel>
             <Select
               labelId="demo-multiple-chip-label"
@@ -146,11 +154,42 @@ function Account() {
           </FormControl>
         </div>
         <div className="Account__flex-row">
-          <Button className="gradient__btn submit__btn">Submit</Button>
+          <Button
+            className="gradient__btn submit__btn"
+            onClick={() => {
+              setUserClasses(selectedClasses);
+            }}
+          >
+            Submit
+          </Button>
         </div>
       </section>
       <section className="container Account__container">
         <h2 className="center">Reset Password</h2>
+        <div className="Account__flex-row">
+          <TextField
+            id="old-password-textfield"
+            label="Old Password"
+            value={oldPassword}
+            type={showOldPassword ? "text" : "password"}
+            onChange={(e) => setOldPassword(e.target.value)}
+            sx={{ backgroundColor: "white", mr: 1, mb: 2 }}
+            InputProps={{
+              endAdornment: (
+                <InputAdornment position="end">
+                  <IconButton
+                    aria-label="toggle password visibility"
+                    onClick={(_) => setShowOldPassword(!showOldPassword)}
+                    onMouseDown={(e) => e.preventDefault()}
+                    edge="end"
+                  >
+                    {showOldPassword ? <VisibilityOff /> : <Visibility />}
+                  </IconButton>
+                </InputAdornment>
+              ),
+            }}
+          />
+        </div>
         <div className="Account__flex-row">
           <TextField
             id="new-password-textfield"
@@ -158,7 +197,7 @@ function Account() {
             value={password}
             type={showPassword ? "text" : "password"}
             onChange={(e) => setPassword(e.target.value)}
-            sx={{ backgroundColor: "white", mr: 1 }}
+            sx={{ backgroundColor: "white", mr: 1, mb: 2 }}
             InputProps={{
               endAdornment: (
                 <InputAdornment position="end">
@@ -174,7 +213,14 @@ function Account() {
               ),
             }}
           />
-          <Button className="gradient__btn reset__btn">Reset</Button>
+        </div>
+        <div className="Account__flex-row">
+          <Button
+            className="gradient__btn reset__btn"
+            onClick={() => setUserPassword(oldPassword, password)}
+          >
+            Reset
+          </Button>
         </div>
       </section>
     </div>

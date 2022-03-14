@@ -11,6 +11,9 @@ import {
   signOut,
   browserLocalPersistence,
   browserSessionPersistence,
+  updatePassword,
+  reauthenticateWithCredential,
+  EmailAuthProvider,
 } from "firebase/auth";
 import {
   getFirestore,
@@ -30,7 +33,7 @@ const firebaseConfig = {
   storageBucket: "flex-manager-7f31e.appspot.com",
   messagingSenderId: "240579438113",
   appId: "1:240579438113:web:af575f8a957ae1ebb92560",
-  measurementId: "G-F1JMXSQNCZ"
+  measurementId: "G-F1JMXSQNCZ",
 };
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
@@ -38,7 +41,7 @@ const db = getFirestore(app);
 const googleProvider = new GoogleAuthProvider();
 const DBState = atom({
   key: "DBState",
-  default: true
+  default: true,
 });
 const signInWithGoogle = async (remember) => {
   try {
@@ -109,7 +112,7 @@ const logout = () => {
 };
 
 const getDefaultClass = async () => {
-  const userDoc = await db.collection('users').doc(auth.currentUser.uid).get();
+  const userDoc = await db.collection("users").doc(auth.currentUser.uid).get();
   return userDoc.defaultClass;
 };
 
@@ -132,16 +135,51 @@ const getAvailableClasses = async () => {
     });
   }
   return availableClasses;
-}
+};
+
+const setUserPassword = async (oldPassword, newPassword) => {
+  const credential = EmailAuthProvider.credential(auth.currentUser.email, oldPassword);
+  try {
+    await reauthenticateWithCredential(auth.currentUser, credential);
+  } catch (err) {
+    alert("Wrong old password");
+    console.error(err);
+    return;
+  }
+  try {
+    await updatePassword(auth.currentUser, newPassword);
+    alert("Password has been reset!");
+  } catch (err) {
+    console.error(err);
+    alert(err.message);
+  }
+};
+
+const setUserClasses = async (classes) => {
+  const uid = auth.currentUser.uid;
+  await updateDoc(doc(db, "users", uid), {
+    classes: classes,
+  });
+  alert("Favorite classes have been updated");
+};
+
+const getUserClasses = async () => {
+  const classes = (await getDoc(doc(db, "users", auth.currentUser.uid))).data().classes;
+  if (classes === undefined) return [];
+  return classes;
+};
 
 export {
   getAvailableClasses,
+  getUserClasses,
+  setUserClasses,
   auth,
   db,
   signInWithGoogle,
   logInWithEmailAndPassword,
   registerWithEmailAndPassword,
   sendPasswordReset,
+  setUserPassword,
   logout,
   getDefaultClass,
   setDefaultClass,

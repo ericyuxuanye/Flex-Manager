@@ -97,10 +97,12 @@ function Dashboard() {
     if (!user) return navigate("/");
     // if we don't know the database is prepared yet, keep waiting
     if (!confirmDB) return;
+    setValue(checkPathValue());
+    // don't fetch again
+    if (!fetchingUserName) return;
     // fetch user name after we are sure the user exists
     fetchUserName().then(() => setFetchingUserName(false));
-    setValue(checkPathValue());
-  }, [loading, user, navigate, confirmDB, setValue, fetchUserName]);
+  }, [loading, user, navigate, confirmDB, setValue, fetchUserName, fetchingUserName]);
   return fetchingUserName ? (
     <div className="middle">
       <CircularProgress />
