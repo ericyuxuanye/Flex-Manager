@@ -1,0 +1,49 @@
+.EditSchedule__header {
+  text-align: center;
+  padding-top: 2em;
+  padding-bottom: 2em;
+  background: rgb(48, 222, 137);
+  background: linear-gradient(
+    141deg,
+    rgba(48, 222, 137, 1) 0%,
+    rgba(0, 140, 175, 1) 81%
+  );
+  color: white;
+  margin-top: 0;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+.EditSchedule__container {
+  display: flex;
+  margin: 2em;
+  flex-wrap: wrap-reverse;
+  justify-content: space-evenly;
+  row-gap: 2em;
+}
+
+.EditSchedule__choices {
+  background-color: #f8f8f8;
+  box-shadow: 2px 2px 5px #e8e8e8;
+  width: 40em;
+  border-radius: 50px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.EditSchedule__choice {
+  display: flex;
+}
+
+.EditSchedule__search {
+  display: flex;
+  margin: 3em;
+}
+
+.EditSchedule__calendar {
+  background-color: white;
+  padding: 1em;
+  border-radius: 20px;
+}

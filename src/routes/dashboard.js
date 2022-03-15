@@ -7,6 +7,7 @@ import { getDoc, doc } from "firebase/firestore";
 import HomeScreen from "../pages/HomeScreen";
 import Messages from "../pages/Messages";
 import Account from "../pages/Account";
+import EditSchedule from "../pages/EditSchedule";
 import Settings from "@mui/icons-material/Settings";
 import Logout from "@mui/icons-material/Logout";
 import {
@@ -185,6 +186,7 @@ function Dashboard() {
       <Routes>
         <Route path="/messages" element={<Messages />} />
         <Route path="/account_settings" element={<Account />} />
+        <Route path="/edit_schedule" element={<EditSchedule />} />
         <Route path="/*" element={<HomeScreen />} />
       </Routes>
     </>

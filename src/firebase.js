@@ -169,7 +169,24 @@ const getUserClasses = async () => {
   return classes;
 };
 
+const addClassToUser = async (date, course) => {
+  const uid = auth.currentUser.uid;
+  const month = date.getMonth();
+  const day = date.getDate();
+  const year = date.getFullYear();
+  const dateString = `${month > 8 ? month + 1 : '0' + month + 1}-${day > 9 ? day : '0' + day}-${year}`
+  // I know, this isn't thread safe, but screw that
+  const userDoc = await getDoc(doc(db, "users", uid));
+  await updateDoc(doc(db, "users", uid), {
+    courses: {
+      ...userDoc.data().courses,
+      [dateString]: course
+    }
+  });
+}
+
 export {
+  addClassToUser,
   getAvailableClasses,
   getUserClasses,
   setUserClasses,
