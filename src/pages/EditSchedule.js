@@ -101,7 +101,7 @@ function EditSchedule() {
         <>
           {selectedClass !== undefined && (
             <h2 className="EditSchedule__SelectedClass" key={selectedClass}>
-              Selected class: {selectedClass}
+              Scheduled class: {selectedClass}
             </h2>
           )}
           <div className="EditSchedule__search">

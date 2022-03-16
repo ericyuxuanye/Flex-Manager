@@ -27,12 +27,18 @@ function ViewSchedule() {
       const schedule = await getSelectedClasses();
       const events = [];
       for (const [date, course] of Object.entries(schedule)) {
-        console.log(date);
         let someDate = new Date(date);
-        console.log(someDate);
         var userTimezoneOffset = someDate.getTimezoneOffset() * 60000;
         let startDate = new Date(someDate.getTime() - userTimezoneOffset);
-        events.push({ title: course, start: startDate, end: startDate, allDay: true});
+        if (someDate.getUTCDay() === 2) {
+          // tuesday schedule
+          startDate.setHours(9, 20);
+        } else {
+          // wednesday schedule
+          startDate.setHours(15);
+        }
+        let endDate = new Date(startDate.getTime() + 45 * 60000);
+        events.push({ title: course, start: startDate, end: endDate, allDay: false});
       }
       console.log(events);
       setEvents(events);
