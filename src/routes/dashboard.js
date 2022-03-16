@@ -51,12 +51,17 @@ function stringToColor(string) {
 
 function stringAvatar(name) {
   let [foreground, background] = stringToColor(name);
+  let words = name.split(" ");
+  let show = words[0][0];
+  if (words.length > 1) {
+    show += words[1][0]
+  }
   return {
     sx: {
       bgcolor: background,
       color: foreground,
     },
-    children: `${name.split(" ")[0][0]}${name.split(" ")[1][0]}`,
+    children: show,
   };
 }
 
