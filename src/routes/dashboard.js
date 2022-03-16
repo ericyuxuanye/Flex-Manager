@@ -8,6 +8,7 @@ import HomeScreen from "../pages/HomeScreen";
 import Messages from "../pages/Messages";
 import Account from "../pages/Account";
 import EditSchedule from "../pages/EditSchedule";
+import ViewSchedule from "../pages/ViewSchedule";
 import Settings from "@mui/icons-material/Settings";
 import Logout from "@mui/icons-material/Logout";
 import {
@@ -103,7 +104,15 @@ function Dashboard() {
     if (!fetchingUserName) return;
     // fetch user name after we are sure the user exists
     fetchUserName().then(() => setFetchingUserName(false));
-  }, [loading, user, navigate, confirmDB, setValue, fetchUserName, fetchingUserName]);
+  }, [
+    loading,
+    user,
+    navigate,
+    confirmDB,
+    setValue,
+    fetchUserName,
+    fetchingUserName,
+  ]);
   return fetchingUserName ? (
     <div className="middle">
       <CircularProgress />
@@ -187,6 +196,7 @@ function Dashboard() {
         <Route path="/messages" element={<Messages />} />
         <Route path="/account_settings" element={<Account />} />
         <Route path="/edit_schedule" element={<EditSchedule />} />
+        <Route path="/view_schedule" element={<ViewSchedule />} />
         <Route path="/*" element={<HomeScreen />} />
       </Routes>
     </>

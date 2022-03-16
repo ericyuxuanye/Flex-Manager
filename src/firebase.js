@@ -138,7 +138,10 @@ const getAvailableClasses = async () => {
 };
 
 const setUserPassword = async (oldPassword, newPassword) => {
-  const credential = EmailAuthProvider.credential(auth.currentUser.email, oldPassword);
+  const credential = EmailAuthProvider.credential(
+    auth.currentUser.email,
+    oldPassword
+  );
   try {
     await reauthenticateWithCredential(auth.currentUser, credential);
   } catch (err) {
@@ -164,9 +167,18 @@ const setUserClasses = async (classes) => {
 };
 
 const getUserClasses = async () => {
-  const classes = (await getDoc(doc(db, "users", auth.currentUser.uid))).data().classes;
+  const classes = (await getDoc(doc(db, "users", auth.currentUser.uid))).data()
+    .classes;
   if (classes === undefined) return [];
   return classes;
+};
+
+// return a object that maps a date string to a course name
+const getSelectedClasses = async () => {
+  const uid = auth.currentUser.uid;
+  const userDoc = await getDoc(doc(db, "users", uid));
+  const courses = userDoc.data().courses;
+  return courses === undefined ? {} : courses;
 };
 
 const addClassToUser = async (date, course) => {
@@ -174,20 +186,23 @@ const addClassToUser = async (date, course) => {
   const month = date.getMonth();
   const day = date.getDate();
   const year = date.getFullYear();
-  const dateString = `${month > 8 ? month + 1 : '0' + month + 1}-${day > 9 ? day : '0' + day}-${year}`
+  const dateString = `${year}-${month > 8 ? month + 1 : "0" + (month + 1)}-${
+    day > 9 ? day + 1 : "0" + day
+  }`;
   // I know, this isn't thread safe, but screw that
   const userDoc = await getDoc(doc(db, "users", uid));
   await updateDoc(doc(db, "users", uid), {
     courses: {
       ...userDoc.data().courses,
-      [dateString]: course
-    }
+      [dateString]: course,
+    },
   });
-}
+};
 
 export {
   addClassToUser,
   getAvailableClasses,
+  getSelectedClasses,
   getUserClasses,
   setUserClasses,
   auth,
