@@ -43,7 +43,7 @@ function Account() {
             multiple
             id="tags-outlined"
             options={classes}
-            defaultValue={selectedClasses}
+            value={selectedClasses}
             filterSelectedOptions
             fullWidth
             sx={{ backgroundColor: "white", mt: 1, mb: 2 }}
