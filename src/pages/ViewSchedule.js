@@ -27,10 +27,12 @@ function ViewSchedule() {
       const schedule = await getSelectedClasses();
       const events = [];
       for (const [date, course] of Object.entries(schedule)) {
-        let someDate = new Date(date);
-        var userTimezoneOffset = someDate.getTimezoneOffset() * 60000;
-        let startDate = new Date(someDate.getTime() - userTimezoneOffset);
-        if (someDate.getUTCDay() === 2) {
+        let startDate = new Date(date);
+        const userTimeOffset = startDate.getTimezoneOffset() * 60000;
+        // have to add to convert UTC time to local time
+        startDate = new Date(startDate.getTime() + userTimeOffset);
+        console.log(startDate);
+        if (startDate.getDay() === 2) {
           // tuesday schedule
           startDate.setHours(9, 20);
         } else {

@@ -22,7 +22,7 @@ const getClassOnDate = (classes, date) => {
   const day = date.getDate();
   const year = date.getFullYear();
   const dateString = `${year}-${month > 8 ? month + 1 : "0" + (month + 1)}-${
-    day > 9 ? day + 1 : "0" + day
+    day > 9 ? day : "0" + day
   }`;
   return classes[dateString];
 };

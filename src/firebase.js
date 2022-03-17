@@ -187,7 +187,7 @@ const addClassToUser = async (date, course) => {
   const day = date.getDate();
   const year = date.getFullYear();
   const dateString = `${year}-${month > 8 ? month + 1 : "0" + (month + 1)}-${
-    day > 9 ? day + 1 : "0" + day
+    day > 9 ? day : "0" + day
   }`;
   // I know, this isn't thread safe, but screw that
   const userDoc = await getDoc(doc(db, "users", uid));
