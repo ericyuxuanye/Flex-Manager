@@ -35,11 +35,11 @@
 }
 
 .submit__btn {
-  background: rgb(45, 172, 0);
+  background: rgb(48, 222, 137);
   background: linear-gradient(
-    90deg,
-    rgba(45, 172, 0, 1) 31%,
-    rgba(179, 255, 0, 1) 95%
+    141deg,
+    rgba(48, 222, 137, 1) 0%,
+    rgba(0, 140, 175, 1) 81%
   );
   background-size: 150% 100%;
 }
