@@ -1,19 +1,11 @@
-import React, { useState, useEffect, useMemo } from "react";
+import React, { useState, useEffect } from "react";
 import {
   TextField,
   InputAdornment,
   IconButton,
-  FormControl,
-  InputLabel,
-  Select,
-  Box,
-  Chip,
-  OutlinedInput,
-  MenuItem,
-  ListSubheader,
+  Autocomplete,
 } from "@mui/material";
-import { useTheme } from "@mui/material/styles";
-import { VisibilityOff, Visibility, Search } from "@mui/icons-material";
+import { VisibilityOff, Visibility } from "@mui/icons-material";
 import Button from "../Button";
 import "./Account.css";
 import {
@@ -23,53 +15,13 @@ import {
   setUserClasses,
 } from "../firebase";
 
-const ITEM_HEIGHT = 48;
-const ITEM_PADDING_TOP = 8;
-
-const MenuProps = {
-  PaperProps: {
-    style: {
-      maxHeight: ITEM_HEIGHT * 4.5 + ITEM_PADDING_TOP,
-      width: 250,
-    },
-  },
-};
-
-function getStyles(name, personName, theme) {
-  return {
-    fontWeight:
-      personName.indexOf(name) === -1
-        ? theme.typography.fontWeightRegular
-        : theme.typography.fontWeightMedium,
-  };
-}
-
-const containsText = (text, searchText) =>
-  text.toLowerCase().indexOf(searchText.toLowerCase()) > -1;
-
 function Account() {
-  const theme = useTheme();
   const [showPassword, setShowPassword] = useState(false);
   const [password, setPassword] = useState("");
   const [showOldPassword, setShowOldPassword] = useState(false);
   const [oldPassword, setOldPassword] = useState("");
   const [selectedClasses, setSelectedClasses] = useState([]);
   const [classes, setClasses] = useState([]);
-  const [searchText, setSearchText] = useState("");
-  const handleChange = (event) => {
-    const {
-      target: { value },
-    } = event;
-    setSelectedClasses(
-      // On autofill we get a stringified value.
-      typeof value === "string" ? value.split(",") : value
-    );
-  };
-
-  const displayedOptions = useMemo(
-    () => classes.filter((option) => containsText(option, searchText)),
-    [searchText, classes]
-  );
   // fetch classes and selected classes once
   useEffect(() => {
     (async () => {
@@ -87,71 +39,30 @@ function Account() {
       <section className="container Account__container">
         <h2 className="Account__center">Favorite Classes</h2>
         <div className="Account__flex-row">
-          <FormControl sx={{ m: 1, width: 300, mb: 2 }}>
-            <InputLabel id="demo-multiple-chip-label">Classes</InputLabel>
-            <Select
-              labelId="demo-multiple-chip-label"
-              id="demo-multiple-chip"
-              multiple
-              sx={{ backgroundColor: "white" }}
-              value={selectedClasses}
-              onChange={handleChange}
-              input={
-                <OutlinedInput id="select-multiple-chip" label="Classes" />
-              }
-              onClose={() => setSearchText("")}
-              renderValue={(selected) => (
-                <Box sx={{ display: "flex", flexWrap: "wrap", gap: 0.5 }}>
-                  {selected.map((value) => (
-                    <Chip
-                      key={value}
-                      label={value}
-                      onMouseDown={(e) => e.stopPropagation()}
-                      onDelete={() => {
-                        setSelectedClasses((prev) =>
-                          [...prev].filter((x) => x !== value)
-                        );
-                      }}
-                    />
-                  ))}
-                </Box>
-              )}
-              MenuProps={MenuProps}
-            >
-              <ListSubheader>
-                <TextField
-                  size="small"
-                  // Autofocus on textfield
-                  autoFocus
-                  placeholder="Type to search..."
-                  fullWidth
-                  InputProps={{
-                    startAdornment: (
-                      <InputAdornment position="start">
-                        <Search />
-                      </InputAdornment>
-                    ),
-                  }}
-                  onChange={(e) => setSearchText(e.target.value)}
-                  onKeyDown={(e) => {
-                    if (e.key !== "Escape") {
-                      // Prevents autoselecting item while typing (default Select behaviour)
-                      e.stopPropagation();
-                    }
-                  }}
-                />
-              </ListSubheader>
-              {displayedOptions.map((c) => (
-                <MenuItem
-                  key={c}
-                  value={c}
-                  style={getStyles(c, selectedClasses, theme)}
-                >
-                  {c}
-                </MenuItem>
-              ))}
-            </Select>
-          </FormControl>
+          <Autocomplete
+            multiple
+            id="tags-outlined"
+            options={classes}
+            defaultValue={selectedClasses}
+            filterSelectedOptions
+            fullWidth
+            sx={{ backgroundColor: "white", mt: 1, mb: 2 }}
+            renderInput={(params) => (
+              <TextField
+                {...params}
+                label="Classes"
+                placeholder="Class"
+                type="text"
+                inputProps={{
+                  ...params.inputProps,
+                  autoComplete: 'new-password'
+                }}
+              />
+            )}
+            onChange={(_, newValue) => {
+              setSelectedClasses(newValue);
+            }}
+          />
         </div>
         <div className="Account__flex-row">
           <Button
@@ -173,7 +84,7 @@ function Account() {
             value={oldPassword}
             type={showOldPassword ? "text" : "password"}
             onChange={(e) => setOldPassword(e.target.value)}
-            sx={{ backgroundColor: "white", mr: 1, mb: 2 }}
+            sx={{ backgroundColor: "white", mb: 2 }}
             InputProps={{
               endAdornment: (
                 <InputAdornment position="end">
@@ -197,7 +108,7 @@ function Account() {
             value={password}
             type={showPassword ? "text" : "password"}
             onChange={(e) => setPassword(e.target.value)}
-            sx={{ backgroundColor: "white", mr: 1, mb: 2 }}
+            sx={{ backgroundColor: "white", mb: 2 }}
             InputProps={{
               endAdornment: (
                 <InputAdornment position="end">
